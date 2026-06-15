@@ -2,4 +2,7 @@
 node_modules
 out
 .vercel
+supabase/.temp
+.env*.local
+.env
 *.log

@@ -801,6 +801,230 @@ h2 {
   line-height: 1.7;
 }
 
+.board-section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 38px clamp(18px, 4vw, 54px);
+  border-top: 1px solid var(--line);
+}
+
+.board-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+
+.board-heading p {
+  max-width: 760px;
+  margin-top: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.refresh-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.refresh-button:hover {
+  border-color: rgba(30, 111, 103, 0.28);
+  background: var(--green-soft);
+  color: var(--teal-dark);
+}
+
+.board-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.75fr) minmax(0, 1.25fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.board-form,
+.post-card,
+.empty-post {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.board-form {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+}
+
+.form-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--teal-dark);
+  font-size: 18px;
+}
+
+.field-label {
+  display: grid;
+  gap: 8px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.field-label input,
+.field-label select,
+.field-label textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.field-label input,
+.field-label select {
+  min-height: 44px;
+  padding: 0 12px;
+}
+
+.field-label textarea {
+  min-height: 150px;
+  resize: vertical;
+  padding: 12px;
+  line-height: 1.6;
+}
+
+.field-label input:focus,
+.field-label select:focus,
+.field-label textarea:focus {
+  outline: 2px solid rgba(30, 111, 103, 0.22);
+  border-color: var(--teal);
+}
+
+.hidden-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.form-footer .submit-link {
+  min-height: 42px;
+  border: 0;
+}
+
+.form-footer .submit-link:disabled,
+.refresh-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+.over-limit {
+  color: var(--rose);
+  font-weight: 800;
+}
+
+.form-message {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.form-message.success {
+  background: var(--green-soft);
+  color: var(--teal-dark);
+}
+
+.form-message.error {
+  background: var(--rose-soft);
+  color: #8e3636;
+}
+
+.post-list {
+  display: grid;
+  gap: 12px;
+}
+
+.empty-post {
+  padding: 22px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.post-card {
+  padding: 18px;
+}
+
+.post-meta,
+.post-author {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.post-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: var(--green-soft);
+  color: var(--teal-dark);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.post-meta time,
+.post-author span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.post-card p {
+  margin-top: 14px;
+  color: #303635;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+
+.post-author {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.post-author strong {
+  font-size: 14px;
+}
+
 .submit-link {
   flex: 0 0 auto;
 }
@@ -912,6 +1136,16 @@ h2 {
 
   .participation-section {
     display: block;
+  }
+
+  .board-heading,
+  .board-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .board-form {
+    padding: 18px;
   }
 
   .submit-link {

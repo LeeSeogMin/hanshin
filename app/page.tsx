@@ -1,11 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ChevronRight, ClipboardList, ExternalLink, Menu, TriangleAlert, X } from "lucide-react";
+import { ChevronRight, ClipboardList, Menu, TriangleAlert, X } from "lucide-react";
+import { FreeBoard } from "@/components/FreeBoard";
 import {
-  dataGaps,
-  evaluationEvidence,
+  evidenceByMenu,
   evidenceCards,
+  gapsByMenu,
+  menuBlockLabels,
   menuItems,
   processSteps,
   sections,
@@ -18,6 +20,9 @@ export default function Home() {
   const active = useMemo(() => sections[activeKey], [activeKey]);
   const activeMenu = useMemo(() => menuItems.find((item) => item.key === activeKey), [activeKey]);
   const ActiveIcon = activeMenu?.icon ?? ClipboardList;
+  const activeEvidence = evidenceByMenu[activeKey];
+  const activeGaps = gapsByMenu[activeKey];
+  const blockLabels = menuBlockLabels[activeKey];
 
   const chooseMenu = (key: MenuKey) => {
     setActiveKey(key);
@@ -181,60 +186,53 @@ export default function Home() {
           </ul>
         </div>
 
-        {active.key === "evaluation" ? (
-          <>
-            <div className="evidence-block">
-              <div className="block-heading">
-                <span className="kicker">증거 등급</span>
-                <h3>무엇이 확정이고, 무엇이 아직 비어 있나</h3>
-              </div>
-              <div className="evidence-list">
-                {evaluationEvidence.map((item) => (
-                  <article className={`evidence-item ${item.tone}`} key={item.title}>
-                    <span className="evidence-grade">{item.grade}</span>
-                    <strong>{item.title}</strong>
-                    <p>{item.body}</p>
-                    <small>{item.source}</small>
-                  </article>
-                ))}
-              </div>
-            </div>
+        <div className="evidence-block">
+          <div className="block-heading">
+            <span className="kicker">{blockLabels.evidenceKicker}</span>
+            <h3>{blockLabels.evidenceTitle}</h3>
+          </div>
+          <div className="evidence-list">
+            {activeEvidence.map((item) => (
+              <article className={`evidence-item ${item.tone}`} key={item.title}>
+                <span className="evidence-grade">{item.grade}</span>
+                <strong>{item.title}</strong>
+                <p>{item.body}</p>
+                <small>{item.source}</small>
+              </article>
+            ))}
+          </div>
+        </div>
 
-            <div className="gap-block">
-              <div className="block-heading">
-                <span className="kicker gap-kicker">
-                  <TriangleAlert aria-hidden="true" size={15} />
-                  필요 보완자료 = 분석의 한계
-                </span>
-                <h3>이 자료가 아직 답하지 못하는 것</h3>
-              </div>
-              <p className="gap-lead">
-                아래 자료가 확보되기 전까지 계열제 평가는 방향(초과 하락)만 확정되고, 원인 경로와
-                처방 효과는 잠정입니다. 무엇이 비어 있는지를 함께 공개하는 것이 숙의의 전제입니다.
-              </p>
-              <div className="gap-grid">
-                {dataGaps.map((gap) => (
-                  <article className="gap-card" key={gap.title}>
-                    <div className="gap-head">
-                      <strong>{gap.title}</strong>
-                      <span className={`gap-tag tag-${gap.tag === "1순위" ? "p1" : gap.tag === "2순위" ? "p2" : "an"}`}>
-                        {gap.tag}
-                      </span>
-                    </div>
-                    <p className="gap-need">
-                      <b>필요</b>
-                      {gap.need}
-                    </p>
-                    <p className="gap-limit">
-                      <b>한계</b>
-                      {gap.limit}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </>
-        ) : null}
+        <div className="gap-block">
+          <div className="block-heading">
+            <span className="kicker gap-kicker">
+              <TriangleAlert aria-hidden="true" size={15} />
+              {blockLabels.gapKicker}
+            </span>
+            <h3>{blockLabels.gapTitle}</h3>
+          </div>
+          <p className="gap-lead">{blockLabels.gapLead}</p>
+          <div className="gap-grid">
+            {activeGaps.map((gap) => (
+              <article className="gap-card" key={gap.title}>
+                <div className="gap-head">
+                  <strong>{gap.title}</strong>
+                  <span className={`gap-tag tag-${gap.tag === "1순위" ? "p1" : gap.tag === "2순위" ? "p2" : "an"}`}>
+                    {gap.tag}
+                  </span>
+                </div>
+                <p className="gap-need">
+                  <b>필요</b>
+                  {gap.need}
+                </p>
+                <p className="gap-limit">
+                  <b>한계</b>
+                  {gap.limit}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="process-section">
@@ -254,20 +252,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="participation-section" id="participation">
-        <div>
-          <span className="kicker">의견수렴</span>
-          <h2>입장보다 근거를 모읍니다.</h2>
-          <p>
-            의견은 세 메뉴 중 하나에 연결해 제출하는 구조가 적합합니다. 다음 버전에서는 Google Form,
-            익명 설문, 전공별 의견 제출 흐름을 연결할 수 있습니다.
-          </p>
-        </div>
-        <a className="submit-link" href="mailto:newmind68@hs.ac.kr?subject=한신대%20학사구조개편%20공론화%20의견">
-          의견 보내기
-          <ExternalLink aria-hidden="true" size={18} />
-        </a>
-      </section>
+      <FreeBoard />
 
       <footer className="footer">
         <p>출처: 교수회 공론용 종합자료, 이슈트리·이해관계자맵, 입시결과 가분석 v1.</p>
