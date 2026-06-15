@@ -183,10 +183,10 @@ main {
 
 .hero-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
-  gap: 30px;
+  grid-template-columns: minmax(0, 1.34fr) minmax(300px, 0.66fr);
+  gap: clamp(28px, 4vw, 52px);
   align-items: stretch;
-  max-width: 1180px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
@@ -214,10 +214,13 @@ main {
 }
 
 h1 {
-  max-width: 760px;
-  font-size: clamp(38px, 5vw, 66px);
-  line-height: 1.06;
+  max-width: 900px;
+  font-size: clamp(36px, 4.25vw, 58px);
+  line-height: 1.14;
   letter-spacing: 0;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  text-wrap: balance;
 }
 
 .hero-copy p {
@@ -267,6 +270,9 @@ h1 {
 
 .hero-panel {
   align-self: center;
+  justify-self: end;
+  width: 100%;
+  max-width: 500px;
   padding: 20px;
   border: 1px solid rgba(32, 35, 35, 0.1);
   border-radius: 8px;
@@ -296,8 +302,8 @@ h1 {
 }
 
 .signal-card {
-  min-height: 132px;
-  padding: 18px;
+  min-height: 118px;
+  padding: 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
@@ -313,14 +319,14 @@ h1 {
 
 .signal-card strong {
   display: block;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .signal-card p {
   margin-top: 8px;
   color: var(--muted);
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 .signal-card.strong {
@@ -838,6 +844,8 @@ h2 {
 
   .hero-panel {
     align-self: stretch;
+    justify-self: stretch;
+    max-width: none;
   }
 
   .metric-row {
@@ -871,7 +879,8 @@ h2 {
   }
 
   h1 {
-    font-size: 36px;
+    font-size: 34px;
+    line-height: 1.16;
   }
 
   .hero-copy p {
