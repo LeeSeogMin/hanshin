@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { ChevronRight, ClipboardList, Menu, TriangleAlert, X } from "lucide-react";
-import { FreeBoard } from "@/components/FreeBoard";
+import { useEffect, useMemo, useState } from "react";
+import { ChevronRight, ClipboardList, MessageSquareText, TriangleAlert } from "lucide-react";
+import { SiteHeader } from "@/components/SiteHeader";
 import {
   evidenceByMenu,
   evidenceCards,
@@ -16,7 +16,6 @@ import {
 
 export default function Home() {
   const [activeKey, setActiveKey] = useState<MenuKey>("evaluation");
-  const [mobileOpen, setMobileOpen] = useState(false);
   const active = useMemo(() => sections[activeKey], [activeKey]);
   const activeMenu = useMemo(() => menuItems.find((item) => item.key === activeKey), [activeKey]);
   const ActiveIcon = activeMenu?.icon ?? ClipboardList;
@@ -24,60 +23,22 @@ export default function Home() {
   const activeGaps = gapsByMenu[activeKey];
   const blockLabels = menuBlockLabels[activeKey];
 
+  useEffect(() => {
+    const topic = new URLSearchParams(window.location.search).get("topic");
+    const matched = menuItems.find((item) => item.key === topic);
+
+    if (matched) {
+      setActiveKey(matched.key);
+    }
+  }, []);
+
   const chooseMenu = (key: MenuKey) => {
     setActiveKey(key);
-    setMobileOpen(false);
   };
 
   return (
     <main>
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="한신대 학사구조개편 공론화 홈">
-          <span className="brand-mark">ㅎ</span>
-          <span>
-            <strong>한신대 학사구조개편</strong>
-            <small>공론화 자료</small>
-          </span>
-        </a>
-        <nav className="desktop-nav" aria-label="주 메뉴">
-          {menuItems.map((item) => (
-            <button
-              key={item.key}
-              className={item.key === activeKey ? "nav-button active" : "nav-button"}
-              type="button"
-              onClick={() => chooseMenu(item.key)}
-            >
-              <item.icon aria-hidden="true" size={18} />
-              {item.label}
-            </button>
-          ))}
-        </nav>
-        <button
-          className="icon-button mobile-toggle"
-          type="button"
-          onClick={() => setMobileOpen((open) => !open)}
-          aria-expanded={mobileOpen}
-          aria-label="메뉴 열기"
-        >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </header>
-
-      {mobileOpen ? (
-        <nav className="mobile-nav" aria-label="모바일 메뉴">
-          {menuItems.map((item) => (
-            <button
-              key={item.key}
-              className={item.key === activeKey ? "mobile-nav-button active" : "mobile-nav-button"}
-              type="button"
-              onClick={() => chooseMenu(item.key)}
-            >
-              <item.icon aria-hidden="true" size={18} />
-              <span>{item.label}</span>
-            </button>
-          ))}
-        </nav>
-      ) : null}
+      <SiteHeader activeKey={activeKey} onChooseMenu={chooseMenu} />
 
       <section className="hero" id="top">
         <div className="hero-inner">
@@ -93,7 +54,7 @@ export default function Home() {
                 쟁점 보기
                 <ChevronRight aria-hidden="true" size={18} />
               </a>
-              <a className="secondary-link" href="#participation">
+              <a className="secondary-link" href="/board">
                 의견수렴
               </a>
             </div>
@@ -252,7 +213,17 @@ export default function Home() {
         </div>
       </section>
 
-      <FreeBoard />
+      <section className="discussion-section" id="participation">
+        <div>
+          <span className="kicker">의견수렴</span>
+          <h2>자유게시판에서 쟁점별 의견을 모읍니다.</h2>
+          <p>로그인 없이 작성하고 공개 목록에서 바로 확인할 수 있습니다.</p>
+        </div>
+        <a className="primary-link" href="/board">
+          <MessageSquareText aria-hidden="true" size={18} />
+          자유게시판 열기
+        </a>
+      </section>
 
       <footer className="footer">
         <p>출처: 교수회 공론용 종합자료, 이슈트리·이해관계자맵, 입시결과 가분석 v1.</p>

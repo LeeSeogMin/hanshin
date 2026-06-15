@@ -348,6 +348,8 @@ h1 {
 .detail-section,
 .process-section,
 .participation-section,
+.discussion-section,
+.board-page-hero,
 .footer {
   max-width: 1180px;
   margin: 0 auto;
@@ -801,6 +803,40 @@ h2 {
   line-height: 1.7;
 }
 
+.discussion-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding-top: 34px;
+  padding-bottom: 34px;
+  border-top: 1px solid var(--line);
+}
+
+.discussion-section p {
+  max-width: 760px;
+  margin-top: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.board-page-hero {
+  padding-top: 54px;
+  padding-bottom: 18px;
+}
+
+.board-page-hero h1 {
+  max-width: 920px;
+}
+
+.board-page-hero p {
+  max-width: 760px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.72;
+}
+
 .board-section {
   max-width: 1180px;
   margin: 0 auto;
@@ -1134,7 +1170,8 @@ h2 {
     grid-template-columns: 1fr;
   }
 
-  .participation-section {
+  .participation-section,
+  .discussion-section {
     display: block;
   }
 
