@@ -95,7 +95,7 @@ export default function Home() {
           </div>
           <div className="hero-panel" aria-label="공론화 진행 원칙">
             <div className="panel-topline">
-              <span>중립 원칙</span>
+              <span>객관성 원칙</span>
               <strong>증거 기반</strong>
             </div>
             <div className="signal-grid">
