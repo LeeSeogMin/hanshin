@@ -9,23 +9,11 @@ export type NavKey = "home" | MenuKey;
 type SiteHeaderProps = {
   activeKey?: NavKey;
   boardActive?: boolean;
-  onChooseHome?: () => void;
-  onChooseMenu?: (key: MenuKey) => void;
 };
 
-export function SiteHeader({ activeKey, boardActive = false, onChooseHome, onChooseMenu }: SiteHeaderProps) {
+export function SiteHeader({ activeKey, boardActive = false }: SiteHeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const brandHref = boardActive ? "/" : "#top";
-
-  const chooseHome = () => {
-    onChooseHome?.();
-    setMobileOpen(false);
-  };
-
-  const chooseMenu = (key: MenuKey) => {
-    onChooseMenu?.(key);
-    setMobileOpen(false);
-  };
+  const brandHref = activeKey === "home" && !boardActive ? "#top" : "/";
 
   const closeMobile = () => setMobileOpen(false);
 
@@ -40,37 +28,15 @@ export function SiteHeader({ activeKey, boardActive = false, onChooseHome, onCho
           </span>
         </a>
         <nav className="desktop-nav" aria-label="주 메뉴">
-          {onChooseHome ? (
-            <button
-              className={activeKey === "home" ? "nav-button active" : "nav-button"}
-              type="button"
-              onClick={chooseHome}
-            >
-              <House aria-hidden="true" size={18} />홈
-            </button>
-          ) : (
-            <a className="nav-button" href="/">
-              <House aria-hidden="true" size={18} />홈
+          <a className={activeKey === "home" ? "nav-button active" : "nav-button"} href="/">
+            <House aria-hidden="true" size={18} />홈
+          </a>
+          {menuItems.map((item) => (
+            <a key={item.key} className={item.key === activeKey ? "nav-button active" : "nav-button"} href={item.href}>
+              <item.icon aria-hidden="true" size={18} />
+              {item.label}
             </a>
-          )}
-          {menuItems.map((item) =>
-            onChooseMenu ? (
-              <button
-                key={item.key}
-                className={item.key === activeKey ? "nav-button active" : "nav-button"}
-                type="button"
-                onClick={() => chooseMenu(item.key)}
-              >
-                <item.icon aria-hidden="true" size={18} />
-                {item.label}
-              </button>
-            ) : (
-              <a key={item.key} className="nav-button" href={`/?topic=${item.key}#agenda`}>
-                <item.icon aria-hidden="true" size={18} />
-                {item.label}
-              </a>
-            )
-          )}
+          ))}
           <a className={boardActive ? "nav-button active" : "nav-button"} href="/board">
             <MessageSquareText aria-hidden="true" size={18} />
             자유게시판
@@ -89,44 +55,25 @@ export function SiteHeader({ activeKey, boardActive = false, onChooseHome, onCho
 
       {mobileOpen ? (
         <nav className="mobile-nav" aria-label="모바일 메뉴">
-          {onChooseHome ? (
-            <button
-              className={activeKey === "home" ? "mobile-nav-button active" : "mobile-nav-button"}
-              type="button"
-              onClick={chooseHome}
+          <a
+            className={activeKey === "home" ? "mobile-nav-button active" : "mobile-nav-button"}
+            href="/"
+            onClick={closeMobile}
+          >
+            <House aria-hidden="true" size={18} />
+            <span>홈</span>
+          </a>
+          {menuItems.map((item) => (
+            <a
+              key={item.key}
+              className={item.key === activeKey ? "mobile-nav-button active" : "mobile-nav-button"}
+              href={item.href}
+              onClick={closeMobile}
             >
-              <House aria-hidden="true" size={18} />
-              <span>홈</span>
-            </button>
-          ) : (
-            <a className="mobile-nav-button" href="/" onClick={closeMobile}>
-              <House aria-hidden="true" size={18} />
-              <span>홈</span>
+              <item.icon aria-hidden="true" size={18} />
+              <span>{item.label}</span>
             </a>
-          )}
-          {menuItems.map((item) =>
-            onChooseMenu ? (
-              <button
-                key={item.key}
-                className={item.key === activeKey ? "mobile-nav-button active" : "mobile-nav-button"}
-                type="button"
-                onClick={() => chooseMenu(item.key)}
-              >
-                <item.icon aria-hidden="true" size={18} />
-                <span>{item.label}</span>
-              </button>
-            ) : (
-              <a
-                key={item.key}
-                className="mobile-nav-button"
-                href={`/?topic=${item.key}#agenda`}
-                onClick={closeMobile}
-              >
-                <item.icon aria-hidden="true" size={18} />
-                <span>{item.label}</span>
-              </a>
-            )
-          )}
+          ))}
           <a
             className={boardActive ? "mobile-nav-button active" : "mobile-nav-button"}
             href="/board"

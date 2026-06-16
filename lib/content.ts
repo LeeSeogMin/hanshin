@@ -20,6 +20,7 @@ export type MenuKey = "evaluation" | "improvement" | "majors";
 export const menuItems = [
   {
     key: "evaluation" as const,
+    href: "/evaluation",
     label: "계열제 평가",
     eyebrow: "진단",
     title: "2023 제도변화 이후 무엇이 확인됐고, 무엇이 아직 분해되지 않았나",
@@ -29,6 +30,7 @@ export const menuItems = [
   },
   {
     key: "improvement" as const,
+    href: "/improvement",
     label: "계열제 보완",
     eyebrow: "설계",
     title: "선택권 확대와 전공 편중 관리를 동시에 만족시키는 보완 조건",
@@ -38,6 +40,7 @@ export const menuItems = [
   },
   {
     key: "majors" as const,
+    href: "/majors",
     label: "전공신설",
     eyebrow: "포트폴리오",
     title: "신설은 유행이 아니라 수요·재정·교육역량 검증을 통과해야 한다",
