@@ -2049,3 +2049,7 @@ h2 {
 .eval-detail-main .metric-row,
 .eval-detail-main .content-grid { margin-top: 14px; }
 .eval-detail-main .eval-detail-note { margin-top: 8px; }
+
+/* 3단 논리를 한신·평택 비교 펼치기 안에 넣었을 때 구분 */
+.eval-logic-nested { margin-top: 22px; padding-top: 20px; border-top: 1px dashed var(--line); }
+.eval-logic-nested h2 { font-size: clamp(19px, 2vw, 24px); }

@@ -152,24 +152,24 @@ export function EvaluationDetail() {
           ))}
         </div>
         <p className="eval-figure-note">{E.story.note}</p>
-      </details>
 
-      {/* 5. 3단 논리 — 위 한신·평택 비교를 단계로 정리 */}
-      <section className="eval-logic">
-        <span className="kicker">{E.logic.kicker}</span>
-        <h2>{E.logic.title}</h2>
-        <ol className="eval-logic-steps">
-          {E.logic.steps.map((step) => (
-            <li className="eval-logic-step" key={step.n}>
-              <span className="eval-step-num">{step.n}</span>
-              <div>
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
+        {/* 3단 논리 — 펼치기 안(한신·평택 비교를 단계로 정리) */}
+        <div className="eval-logic eval-logic-nested">
+          <span className="kicker">{E.logic.kicker}</span>
+          <h2>{E.logic.title}</h2>
+          <ol className="eval-logic-steps">
+            {E.logic.steps.map((step) => (
+              <li className="eval-logic-step" key={step.n}>
+                <span className="eval-step-num">{step.n}</span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </details>
 
       {/* 6. 함께 봐야 할 사실 (접기) */}
       <details className="fold-block eval-fold">
