@@ -142,27 +142,11 @@ export function EvaluationDetail() {
         </ol>
       </section>
 
-      {/* 6. 함께 봐야 할 사실 (접기) */}
-      <details className="fold-block eval-fold">
-        <summary className="fold-summary">
-          <span className="kicker">{E.supporting.kicker}</span>
-          <h3>{E.supporting.title}</h3>
-        </summary>
-        <div className="eval-support-grid">
-          {E.supporting.cards.map((card) => (
-            <article className="eval-support-card" key={card.title}>
-              <h4>{card.title}</h4>
-              <p>{card.body}</p>
-            </article>
-          ))}
-        </div>
-      </details>
-
-      {/* 7. 한신·평택 쉬운 비교 (접기) */}
+      {/* 5. 한신·평택 쉬운 비교 (접기) — 위 3단 논리의 그림 근거 */}
       <details className="fold-block eval-story-fold">
         <summary className="fold-summary">
           <span className="kicker">{E.story.kicker}</span>
-          <h3>{E.story.title} — 쉬운 비교(한신 vs 평택)</h3>
+          <h3>그림으로 보기 — 한신 vs 평택 비교</h3>
         </summary>
         <p className="eval-lead">{E.story.lead}</p>
         <figure className="eval-figure">
@@ -185,6 +169,22 @@ export function EvaluationDetail() {
           ))}
         </div>
         <p className="eval-figure-note">{E.story.note}</p>
+      </details>
+
+      {/* 6. 함께 봐야 할 사실 (접기) */}
+      <details className="fold-block eval-fold">
+        <summary className="fold-summary">
+          <span className="kicker">{E.supporting.kicker}</span>
+          <h3>{E.supporting.title}</h3>
+        </summary>
+        <div className="eval-support-grid">
+          {E.supporting.cards.map((card) => (
+            <article className="eval-support-card" key={card.title}>
+              <h4>{card.title}</h4>
+              <p>{card.body}</p>
+            </article>
+          ))}
+        </div>
       </details>
 
       {/* 8. 근거자료 폴더 (접기) */}
