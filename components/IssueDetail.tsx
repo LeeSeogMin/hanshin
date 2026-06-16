@@ -54,15 +54,17 @@ export function IssueDetail({ menuKey }: IssueDetailProps) {
         </p>
       </div>
 
-      <div className="metric-row">
-        {active.metrics.map((metric) => (
-          <article className="metric-card" key={`${active.key}-${metric.label}`}>
-            <strong>{metric.value}</strong>
-            <span>{metric.label}</span>
-            <small>{metric.note}</small>
-          </article>
-        ))}
-      </div>
+      {active.metrics.length > 0 ? (
+        <div className="metric-row">
+          {active.metrics.map((metric) => (
+            <article className="metric-card" key={`${active.key}-${metric.label}`}>
+              <strong>{metric.value}</strong>
+              <span>{metric.label}</span>
+              <small>{metric.note}</small>
+            </article>
+          ))}
+        </div>
+      ) : null}
 
       {menuKey === "evaluation" ? (
         <figure className="analysis-figure">
