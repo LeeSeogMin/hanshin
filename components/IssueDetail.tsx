@@ -1,6 +1,7 @@
 import { ClipboardList, TriangleAlert } from "lucide-react";
+import Image from "next/image";
 import {
-  evidenceByMenu,
+  cardEvidenceByMenu,
   gapsByMenu,
   menuBlockLabels,
   menuItems,
@@ -18,7 +19,7 @@ export function IssueDetail({ menuKey }: IssueDetailProps) {
   const active = sections[menuKey];
   const activeMenu = menuItems.find((item) => item.key === menuKey);
   const ActiveIcon = activeMenu?.icon ?? ClipboardList;
-  const activeEvidence = evidenceByMenu[menuKey];
+  const activeCardEvidence = cardEvidenceByMenu[menuKey];
   const activeGaps = gapsByMenu[menuKey];
   const blockLabels = menuBlockLabels[menuKey];
   const activeSim = simBlocksByMenu[menuKey];
@@ -63,16 +64,66 @@ export function IssueDetail({ menuKey }: IssueDetailProps) {
         ))}
       </div>
 
+      {menuKey === "evaluation" ? (
+        <figure className="analysis-figure">
+          <div className="analysis-figure-heading">
+            <span className="kicker">분석 그래프</span>
+            <h3>경쟁률 추이와 2022년 전후 비교</h3>
+          </div>
+          <div className="analysis-figure-scroll">
+            <Image
+              src="/images/evaluation-competition-analysis.svg"
+              alt="2016년부터 2026년까지 한신대, 경기도 대학 평균, 전체 대학 평균, 보고서 비교군 평균의 경쟁률 추이와 전후 변화 비교 그래프"
+              width={1600}
+              height={1000}
+              priority
+              unoptimized
+            />
+          </div>
+          <figcaption>
+            경쟁률_연도별비교.csv를 재실행 가능한 스크립트로 시각화한 기술통계 그래프입니다. SDID 인과추정
+            자체를 재현한 그래프는 아니며, 전후 추이와 단순 DID 방향을 보여주는 참고 자료입니다.
+          </figcaption>
+        </figure>
+      ) : null}
+
       <div className="content-grid">
-        {active.cards.map((card) => (
-          <article className="info-card" key={card.title}>
-            <span className="info-icon">
-              <card.icon aria-hidden="true" size={22} />
-            </span>
-            <h3>{card.title}</h3>
-            <p>{card.body}</p>
-          </article>
-        ))}
+        {active.cards.map((card, ci) => {
+          const evidence = activeCardEvidence[ci] ?? [];
+          return (
+            <article className="info-card" key={card.title}>
+              <span className="info-icon">
+                <card.icon aria-hidden="true" size={22} />
+              </span>
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+              {evidence.length > 0 ? (
+                <details className="card-evidence">
+                  <summary>근거 보기</summary>
+                  <div className="card-evidence-list">
+                    {evidence.map((item, ei) => (
+                      <div className={`card-evidence-item ${item.tone}`} key={ei}>
+                        <span className="card-evidence-grade">{item.grade}</span>
+                        <p>{item.detail}</p>
+                        <small>
+                          출처: {item.source}
+                          {item.url ? (
+                            <>
+                              {" · "}
+                              <a href={item.url} target="_blank" rel="noopener noreferrer">
+                                원문 링크
+                              </a>
+                            </>
+                          ) : null}
+                        </small>
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              ) : null}
+            </article>
+          );
+        })}
       </div>
 
       <div className="question-panel">
@@ -86,23 +137,6 @@ export function IssueDetail({ menuKey }: IssueDetailProps) {
           ))}
         </ul>
       </div>
-
-      <details className="fold-block">
-        <summary className="fold-summary">
-          <span className="kicker">{blockLabels.evidenceKicker}</span>
-          <h3>{blockLabels.evidenceTitle}</h3>
-        </summary>
-        <div className="evidence-list">
-          {activeEvidence.map((item) => (
-            <article className={`evidence-item ${item.tone}`} key={item.title}>
-              <span className="evidence-grade">{item.grade}</span>
-              <strong>{item.title}</strong>
-              <p>{item.body}</p>
-              <small>{item.source}</small>
-            </article>
-          ))}
-        </div>
-      </details>
 
       {activeSim ? (
         <details className="fold-block">

@@ -607,6 +607,44 @@ h2 {
   font-size: 13px;
 }
 
+.analysis-figure {
+  margin: 16px 0 0;
+  padding: 22px;
+  border: 1px solid rgba(30, 111, 103, 0.22);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.analysis-figure-heading {
+  margin-bottom: 14px;
+}
+
+.analysis-figure-heading h3 {
+  font-size: clamp(20px, 2.4vw, 27px);
+  line-height: 1.22;
+}
+
+.analysis-figure-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.analysis-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.analysis-figure figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
 .content-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -758,6 +796,99 @@ h2 {
   margin-top: 10px;
   color: var(--muted);
   font-size: 12px;
+}
+
+/* 주장 카드별 '근거 보기' 펼침 */
+.card-evidence {
+  margin-top: 14px;
+  border-top: 1px dashed var(--line);
+  padding-top: 12px;
+}
+
+.card-evidence > summary {
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.card-evidence > summary::-webkit-details-marker {
+  display: none;
+}
+
+.card-evidence > summary::before {
+  content: "▸";
+  font-size: 11px;
+  transition: transform 0.15s ease;
+}
+
+.card-evidence[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.card-evidence[open] > summary {
+  margin-bottom: 10px;
+}
+
+.card-evidence-list {
+  display: grid;
+  gap: 10px;
+}
+
+.card-evidence-item {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-left-width: 4px;
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.card-evidence-item.strong {
+  border-left-color: var(--teal);
+  background: var(--green-soft);
+}
+
+.card-evidence-item.caution {
+  border-left-color: var(--gold);
+  background: var(--gold-soft);
+}
+
+.card-evidence-item.open {
+  border-left-color: var(--rose);
+  background: var(--rose-soft);
+}
+
+.card-evidence-grade {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 1px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.card-evidence-item p {
+  margin-top: 4px;
+  color: #45504b;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.card-evidence-item small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.card-evidence-item a {
+  color: var(--teal);
+  text-decoration: underline;
 }
 
 .gap-lead {
@@ -1623,6 +1754,7 @@ h2 {
 
   .metric-card,
   .info-card,
+  .analysis-figure,
   .process-card,
   .home-summary-card,
   .topic-card,
@@ -1631,6 +1763,11 @@ h2 {
   .sim-card,
   .post-card {
     padding: 18px;
+  }
+
+  .analysis-figure img {
+    width: 760px;
+    max-width: none;
   }
 
   .participation-section,
