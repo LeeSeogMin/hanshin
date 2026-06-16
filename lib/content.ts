@@ -52,7 +52,7 @@ export const menuItems = [
 
 export const evidenceCards = [
   {
-    label: "확정",
+    label: "강건한 추정",
     title: "비교군 대비 추가 하락",
     body: "SDID -1.60, DID -2.78, 독립 가분석 -2.1~-3.0으로 방향이 일관됩니다.",
     tone: "strong"
@@ -119,14 +119,14 @@ export const sections = {
     metrics: [
       { value: "9.04 → 6.21", label: "도입 전후 평균 경쟁률", note: "2016~2022 → 2023~2026" },
       { value: "-31.4%", label: "단순 전후 변화", note: "인과 단정 금지" },
-      { value: "-1.60배", label: "비교군 대비 초과 하락 (SDID)", note: "DID -2.78, 방향 일관" }
+      { value: "-1.60배", label: "비교군 대비 초과 하락 (SDID)", note: "방향 강건(직접재현 clean -1.54) · 단 효과의 약 86%가 2022 선행급락에 귀속" }
     ],
     cards: [
       {
         icon: LineChart,
         title: "비교군 대비 초과 하락 (강건한 추정)",
         body:
-          "SDID -1.60, DID -2.78, 독립 가분석 -2.1~-3.0이 같은 방향을 가리킵니다. 사전추세 검정(p=0.80) 통과로 '원래 추세가 달랐다'는 반론은 약화됩니다. 단 공간 플라시보 p=0.10 경계·2022 선행급락 때문에 '확정'까지는 유보합니다."
+          "SDID -1.60, DID -2.78, 독립 가분석 -2.1~-3.0이 같은 방향을 가리킵니다. 1차 원자료 직접 재현에서도 방향이 일치합니다(clean 비교군 -1.54). 다만 가짜 처치연도를 2022(계열제 1년 전)로 두면 효과의 약 86%(-1.73)가 이미 나타나, 하락의 상당 부분이 2023 계열제 이전에 발생했습니다. 또 공간 플라시보 p=0.10 경계이고, 신뢰구간도 넓어 '확정'·정밀한 크기 단정은 유보합니다."
       },
       {
         icon: BarChart3,
@@ -290,8 +290,8 @@ export const cardEvidenceByMenu: Record<MenuKey, CardEvidence[][]> = {
         grade: "강건한 추정",
         tone: "strong",
         detail:
-          "SDID -1.60, DID -2.78, 독립 가분석 -2.1~-3.0이 같은 방향. 사전추세 검정 p=0.80 통과. 단 공간 플라시보 p=0.10 경계·2022 선행급락 때문에 '확정'까지는 유보합니다.",
-        source: "분석결과보고서·가분석 v1 (준실험)"
+          "SDID -1.60, DID -2.78, 독립 가분석 -2.1~-3.0이 같은 방향. 1차 원자료 직접 재현도 일치(clean 비교군 -1.54). 단 가짜 처치연도 2022(계열제 1년 전)만으로 효과의 약 86%(-1.73)가 나타나 상당 부분이 계열제 이전 발생. 공간 플라시보 p=0.10 경계·신뢰구간 넓음 → '확정'·정밀 크기 단정 유보.",
+        source: "분석결과보고서·가분석 v1·SDID 직접검증 v1 (준실험)"
       }
     ],
     // 2. 전 계열에 걸친 약세
@@ -632,6 +632,7 @@ export const menuBlockLabels: Record<
 
 type SimTable = {
   title: string;
+  interpretation: string;
   caption: string;
   head: string[];
   rows: string[][];
@@ -647,6 +648,7 @@ export const simBlocksByMenu: Partial<Record<MenuKey, { kicker: string; title: s
     tables: [
       {
         title: "① 전공선택 비율 상한별 편중",
+        interpretation: "간단 해석: 상한을 높이면 선택권은 넓어지지만, 인기 전공 집중과 취약 단위 공동화 위험도 같이 커집니다.",
         caption: "상한이 높을수록 편중·취약단위가 단조 증가합니다.",
         head: ["상한", "편중(HHI)", "상위5 비중", "취약단위(<정원50%)"],
         rows: [
@@ -658,6 +660,7 @@ export const simBlocksByMenu: Partial<Record<MenuKey, { kicker: string; title: s
       },
       {
         title: "② 같은 200%, 동반 메커니즘별 결과",
+        interpretation: "간단 해석: 단순히 200%로 푸는 것보다, 넛지와 학과보호를 함께 설계할 때 취약 단위 보호와 학생 자율성이 동시에 개선됩니다.",
         caption: "'상한 수치'가 아니라 '설계'가 취약단위 보호와 자율성을 동시에 좌우합니다.",
         head: ["대안 (200%)", "편중(HHI)", "취약 충원율", "자율성(1지망)"],
         rows: [
@@ -681,6 +684,7 @@ export const simBlocksByMenu: Partial<Record<MenuKey, { kicker: string; title: s
     tables: [
       {
         title: "신설 후보 × 핵심 기준 (◎강 ○보통 △약·조건부 ✗불리)",
+        interpretation: "간단 해석: 연기예술은 외부 경쟁률만 보면 매력적일 수 있지만, 한신의 기존 역량·정체성과 맞는 후보는 기독교사회복지 쪽입니다.",
         caption: "정체성·교육역량 기준에선 기존 자원을 잇는 후보가 연기예술보다 정합적입니다.",
         head: ["후보", "수요", "교육역량", "정체성", "차별화·레드오션"],
         rows: [

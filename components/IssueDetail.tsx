@@ -68,21 +68,23 @@ export function IssueDetail({ menuKey }: IssueDetailProps) {
         <figure className="analysis-figure">
           <div className="analysis-figure-heading">
             <span className="kicker">분석 그래프</span>
-            <h3>경쟁률 추이와 2022년 전후 비교</h3>
+            <h3>한신대 vs 합성대조군 — 계열제 효과 직접검증(SDID)</h3>
           </div>
           <div className="analysis-figure-scroll">
             <Image
               src="/images/evaluation-competition-analysis.svg"
-              alt="2016년부터 2026년까지 한신대, 경기도 대학 평균, 전체 대학 평균, 보고서 비교군 평균의 경쟁률 추이와 전후 변화 비교 그래프"
+              alt="한신대와 합성대조군(SDID)의 2016~2025 경쟁률 추이, 사양별 효과 추정치와 신뢰구간, 가짜 처치연도별 시간 플라시보를 보여주는 직접검증 그래프"
               width={1600}
-              height={1000}
+              height={1040}
               priority
               unoptimized
             />
           </div>
           <figcaption>
-            경쟁률_연도별비교.csv를 재실행 가능한 스크립트로 시각화한 기술통계 그래프입니다. SDID 인과추정
-            자체를 재현한 그래프는 아니며, 전후 추이와 단순 DID 방향을 보여주는 참고 자료입니다.
+            data.xlsx 전국 패널을 1차 원자료로 SDID(합성대조군)를 직접 재현한 결과입니다(재현 스크립트:
+            scripts/sdid_replication.py). 비교군 대비 초과 하락의 <strong>방향은 강건</strong>하나, 신뢰구간이
+            넓고 효과의 상당 부분이 <strong>2022년 선행 급락</strong>(계열제 도입 1년 전)에 귀속되어 ‘계열제
+            단일 순효과’로 단정할 수 없습니다.
           </figcaption>
         </figure>
       ) : null}
@@ -171,6 +173,7 @@ export function IssueDetail({ menuKey }: IssueDetailProps) {
                     </tbody>
                   </table>
                 </div>
+                <p className="sim-interpretation">{table.interpretation}</p>
                 <p className="sim-caption">{table.caption}</p>
               </article>
             ))}

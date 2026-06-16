@@ -84,6 +84,7 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  min-height: 44px;
   min-width: 230px;
 }
 
@@ -918,6 +919,9 @@ h2 {
 }
 
 .card-evidence-item a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
   color: var(--teal);
   text-decoration: underline;
 }
@@ -1085,6 +1089,19 @@ h2 {
 
 .sim-table tr.row-best td.row-label {
   color: var(--teal-dark);
+}
+
+.sim-interpretation {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(30, 111, 103, 0.2);
+  border-radius: 8px;
+  background: var(--green-soft);
+  color: #2e4640;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.55;
+  word-break: keep-all;
 }
 
 .sim-caption {
