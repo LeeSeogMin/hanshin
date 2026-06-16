@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { ChevronRight, ClipboardList, MessageSquareText, TriangleAlert } from "lucide-react";
-import { SiteHeader } from "@/components/SiteHeader";
+import { SiteHeader, type NavKey } from "@/components/SiteHeader";
 import {
   evidenceByMenu,
   evidenceCards,
@@ -11,34 +11,77 @@ import {
   menuItems,
   processSteps,
   sections,
+  simBlocksByMenu,
   type MenuKey
 } from "@/lib/content";
 
+const homeSummary = [
+  {
+    label: "목적",
+    title: "결론보다 판단 기준을 먼저 세웁니다.",
+    body:
+      "학사구조개편을 찬반 구도로 단순화하지 않고, 확정 근거·잠정 해석·미확보 데이터를 분리해 공개합니다."
+  },
+  {
+    label: "범위",
+    title: "평가, 보완, 신설을 한 의사결정 묶음으로 봅니다.",
+    body:
+      "계열제 평가가 진단이고, 계열제 보완은 설계이며, 전공신설은 포트폴리오 선택지입니다. 셋을 분리하되 같은 기준으로 비교합니다."
+  },
+  {
+    label: "원칙",
+    title: "객관성 원칙과 증거 기반을 유지합니다.",
+    body:
+      "미검증 수치와 인과 주장은 단정하지 않습니다. 반대 논거와 데이터 공백을 함께 남기는 방식으로 공론화를 진행합니다."
+  }
+];
+
+const decisionFlow = [
+  { step: "1", title: "먼저 진단", body: "경쟁률 하락과 제도 효과를 분해해 무엇이 확인됐는지 봅니다." },
+  { step: "2", title: "그 다음 설계", body: "유지·보완 시 편중을 막는 규칙과 중단 기준을 정합니다." },
+  { step: "3", title: "마지막 비교", body: "전공신설을 포함한 대안을 수요·재정·교육역량 기준으로 비교합니다." }
+];
+
 export default function Home() {
-  const [activeKey, setActiveKey] = useState<MenuKey>("evaluation");
-  const active = useMemo(() => sections[activeKey], [activeKey]);
-  const activeMenu = useMemo(() => menuItems.find((item) => item.key === activeKey), [activeKey]);
+  const [activeKey, setActiveKey] = useState<NavKey>("home");
+  const selectedMenuKey: MenuKey = activeKey === "home" ? "evaluation" : activeKey;
+  const active = useMemo(() => sections[selectedMenuKey], [selectedMenuKey]);
+  const activeMenu = useMemo(() => menuItems.find((item) => item.key === selectedMenuKey), [selectedMenuKey]);
   const ActiveIcon = activeMenu?.icon ?? ClipboardList;
-  const activeEvidence = evidenceByMenu[activeKey];
-  const activeGaps = gapsByMenu[activeKey];
-  const blockLabels = menuBlockLabels[activeKey];
+  const activeEvidence = evidenceByMenu[selectedMenuKey];
+  const activeGaps = gapsByMenu[selectedMenuKey];
+  const blockLabels = menuBlockLabels[selectedMenuKey];
+  const activeSim = simBlocksByMenu[selectedMenuKey];
 
   useEffect(() => {
     const topic = new URLSearchParams(window.location.search).get("topic");
     const matched = menuItems.find((item) => item.key === topic);
+
+    if (topic === "home") {
+      setActiveKey("home");
+      return;
+    }
 
     if (matched) {
       setActiveKey(matched.key);
     }
   }, []);
 
+  const chooseHome = () => {
+    setActiveKey("home");
+    window.history.replaceState(null, "", "/");
+    window.requestAnimationFrame(() => document.getElementById("top")?.scrollIntoView());
+  };
+
   const chooseMenu = (key: MenuKey) => {
     setActiveKey(key);
+    window.history.replaceState(null, "", `/?topic=${key}#agenda`);
+    window.requestAnimationFrame(() => document.getElementById("agenda")?.scrollIntoView());
   };
 
   return (
     <main>
-      <SiteHeader activeKey={activeKey} onChooseMenu={chooseMenu} />
+      <SiteHeader activeKey={activeKey} onChooseHome={chooseHome} onChooseMenu={chooseMenu} />
 
       <section className="hero" id="top">
         <div className="hero-inner">
@@ -79,8 +122,8 @@ export default function Home() {
 
       <section className="menu-section" id="agenda">
         <div className="section-heading">
-          <span className="kicker">메인 메뉴</span>
-          <h2>세 갈래로 나누어 검토합니다.</h2>
+          <span className="kicker">{activeKey === "home" ? "세 이슈" : "메인 메뉴"}</span>
+          <h2>{activeKey === "home" ? "프로젝트 목적에서 세 쟁점으로 연결합니다." : "세 갈래로 나누어 검토합니다."}</h2>
         </div>
         <div className="menu-grid">
           {menuItems.map((item) => (
@@ -101,7 +144,42 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="detail-section" aria-live="polite">
+      {activeKey === "home" ? (
+        <section className="home-summary-section" aria-live="polite">
+          <div className="home-summary-grid">
+            {homeSummary.map((item) => (
+              <article className="home-summary-card" key={item.title}>
+                <span>{item.label}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="home-flow-panel">
+            <div>
+              <span className="kicker">판단 흐름</span>
+              <h2>홈은 세 메뉴의 상위 지도입니다.</h2>
+              <p>
+                이 프로젝트는 먼저 진단하고, 그 진단 위에서 제도 보완과 전공신설을 비교합니다.
+                자유게시판은 이 흐름에 대한 근거와 반론을 남기는 공간입니다.
+              </p>
+            </div>
+            <div className="home-flow-list">
+              {decisionFlow.map((item) => (
+                <article className="home-flow-item" key={item.step}>
+                  <span>{item.step}</span>
+                  <div>
+                    <strong>{item.title}</strong>
+                    <p>{item.body}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : (
+        <section className="detail-section" aria-live="polite">
         <div className="detail-intro">
           <span className="detail-icon">
             <ActiveIcon aria-hidden="true" size={28} />
@@ -164,6 +242,47 @@ export default function Home() {
           </div>
         </div>
 
+        {activeSim ? (
+          <div className="sim-block">
+            <div className="block-heading">
+              <span className="kicker">{activeSim.kicker}</span>
+              <h3>{activeSim.title}</h3>
+            </div>
+            <p className="gap-lead">{activeSim.lead}</p>
+            <div className="sim-grid">
+              {activeSim.tables.map((table) => (
+                <article className="sim-card" key={table.title}>
+                  <h4>{table.title}</h4>
+                  <div className="sim-table-wrap">
+                    <table className="sim-table">
+                      <thead>
+                        <tr>
+                          {table.head.map((h) => (
+                            <th key={h}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {table.rows.map((row, ri) => (
+                          <tr key={row[0]} className={table.highlight === ri ? "row-best" : undefined}>
+                            {row.map((cell, ci) => (
+                              <td key={ci} className={ci === 0 ? "row-label" : undefined}>
+                                {cell}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="sim-caption">{table.caption}</p>
+                </article>
+              ))}
+            </div>
+            <p className="sim-note">{activeSim.note}</p>
+          </div>
+        ) : null}
+
         <div className="gap-block">
           <div className="block-heading">
             <span className="kicker gap-kicker">
@@ -194,7 +313,8 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+        </section>
+      )}
 
       <section className="process-section">
         <div className="section-heading">

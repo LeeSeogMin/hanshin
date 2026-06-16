@@ -1,18 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, MessageSquareText, X } from "lucide-react";
+import { House, Menu, MessageSquareText, X } from "lucide-react";
 import { menuItems, type MenuKey } from "@/lib/content";
 
+export type NavKey = "home" | MenuKey;
+
 type SiteHeaderProps = {
-  activeKey?: MenuKey;
+  activeKey?: NavKey;
   boardActive?: boolean;
+  onChooseHome?: () => void;
   onChooseMenu?: (key: MenuKey) => void;
 };
 
-export function SiteHeader({ activeKey, boardActive = false, onChooseMenu }: SiteHeaderProps) {
+export function SiteHeader({ activeKey, boardActive = false, onChooseHome, onChooseMenu }: SiteHeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const brandHref = boardActive ? "/" : "#top";
+
+  const chooseHome = () => {
+    onChooseHome?.();
+    setMobileOpen(false);
+  };
 
   const chooseMenu = (key: MenuKey) => {
     onChooseMenu?.(key);
@@ -32,6 +40,19 @@ export function SiteHeader({ activeKey, boardActive = false, onChooseMenu }: Sit
           </span>
         </a>
         <nav className="desktop-nav" aria-label="주 메뉴">
+          {onChooseHome ? (
+            <button
+              className={activeKey === "home" ? "nav-button active" : "nav-button"}
+              type="button"
+              onClick={chooseHome}
+            >
+              <House aria-hidden="true" size={18} />홈
+            </button>
+          ) : (
+            <a className="nav-button" href="/">
+              <House aria-hidden="true" size={18} />홈
+            </a>
+          )}
           {menuItems.map((item) =>
             onChooseMenu ? (
               <button
@@ -68,6 +89,21 @@ export function SiteHeader({ activeKey, boardActive = false, onChooseMenu }: Sit
 
       {mobileOpen ? (
         <nav className="mobile-nav" aria-label="모바일 메뉴">
+          {onChooseHome ? (
+            <button
+              className={activeKey === "home" ? "mobile-nav-button active" : "mobile-nav-button"}
+              type="button"
+              onClick={chooseHome}
+            >
+              <House aria-hidden="true" size={18} />
+              <span>홈</span>
+            </button>
+          ) : (
+            <a className="mobile-nav-button" href="/" onClick={closeMobile}>
+              <House aria-hidden="true" size={18} />
+              <span>홈</span>
+            </a>
+          )}
           {menuItems.map((item) =>
             onChooseMenu ? (
               <button
