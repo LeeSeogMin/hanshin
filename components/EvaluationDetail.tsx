@@ -111,20 +111,7 @@ export function EvaluationDetail() {
         </div>
       </details>
 
-      {/* 7. 공론 질문 */}
-      <div className="question-panel">
-        <div>
-          <span className="kicker">{E.questions.kicker}</span>
-          <h3>{E.questions.title}</h3>
-        </div>
-        <ul>
-          {E.questions.items.map((q) => (
-            <li key={q}>{q}</li>
-          ))}
-        </ul>
-      </div>
-
-      {/* 7.5 상세 분석 (전문가용) — SDID 복원 */}
+      {/* 7. 상세 분석 (전문가용) — SDID 복원 */}
       <details className="fold-block eval-detail">
         <summary className="fold-summary">
           <span className="kicker">

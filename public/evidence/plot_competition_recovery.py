@@ -105,9 +105,9 @@ def main():
 
     # 하단 한 줄 메시지
     P.append(f'<rect x="60" y="{H-92}" width="{W-120}" height="64" rx="12" fill="#fbf6ec" stroke="#ecdfc4"/>')
-    P.append(txt("같은 충격을 받았는데 한 곳만 안 돌아왔습니다.",
+    P.append(txt("평택은 돌아왔지만, 한신은 돌아오지 못했습니다.",
                  W / 2, H - 60, 18, "#7a5a12", 800, "middle"))
-    P.append(txt("이 차이는 한신이 2023년에 바꾼 것을 가리킵니다 — 무엇이 '어떻게'였는지는 추가 자료로 가립니다.",
+    P.append(txt("이 차이는 한신이 2023년에 바꾼 것 — 계열제를 가리킵니다.",
                  W / 2, H - 36, 15, "#8a7240", 400, "middle"))
 
     P.append("</svg>")
