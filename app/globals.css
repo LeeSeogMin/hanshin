@@ -2032,3 +2032,14 @@ h2 {
   .eval-bar-caption { grid-column: 2; }
   .eval-evidence-tier { grid-template-columns: 1fr; gap: 6px; }
 }
+
+/* 상세 분석(전문가용) 박스 */
+.eval-detail[open] > .fold-summary { margin-bottom: 4px; }
+.eval-detail-note {
+  margin: 4px 0 14px; padding: 12px 14px; border-radius: 8px;
+  background: var(--surface-muted); border: 1px solid var(--line);
+  color: var(--muted); font-size: 14px; line-height: 1.6;
+}
+.eval-detail .analysis-figure { margin-top: 6px; }
+.eval-detail .metric-row { margin-top: 14px; }
+.eval-detail .content-grid { margin-top: 14px; }
