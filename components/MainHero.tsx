@@ -1,5 +1,4 @@
 import { ChevronRight } from "lucide-react";
-import { evidenceCards } from "@/lib/content";
 
 export function MainHero() {
   return (
@@ -20,21 +19,6 @@ export function MainHero() {
             <a className="secondary-link" href="/board">
               의견수렴
             </a>
-          </div>
-        </div>
-        <div className="hero-panel" aria-label="공론화 진행 원칙">
-          <div className="panel-topline">
-            <span>객관성 원칙</span>
-            <strong>증거 기반</strong>
-          </div>
-          <div className="signal-grid">
-            {evidenceCards.map((card) => (
-              <article className={`signal-card ${card.tone}`} key={card.title}>
-                <span>{card.label}</span>
-                <strong>{card.title}</strong>
-                <p>{card.body}</p>
-              </article>
-            ))}
           </div>
         </div>
       </div>

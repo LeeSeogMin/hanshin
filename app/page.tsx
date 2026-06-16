@@ -15,12 +15,6 @@ const homeSummary = [
     title: "평가, 보완, 신설을 한 의사결정 묶음으로 봅니다.",
     body:
       "계열제 평가는 진단이고, 계열제 보완은 설계이며, 전공신설은 포트폴리오 선택지입니다. 셋을 분리하되 같은 기준으로 비교합니다."
-  },
-  {
-    label: "원칙",
-    title: "객관성 원칙과 증거 기반을 유지합니다.",
-    body:
-      "미검증 수치와 인과 주장은 단정하지 않습니다. 반대 논거와 데이터 공백을 함께 남기는 방식으로 공론화를 진행합니다."
   }
 ];
 
@@ -48,6 +42,21 @@ export default function Home() {
       <SiteHeader activeKey="home" />
       <MainHero />
       <IssueMenuGrid homeMode />
+
+      <section className="source-correction-notice" aria-labelledby="source-correction-title">
+        <div>
+          <span className="kicker">자료 정정 안내</span>
+          <h2 id="source-correction-title">분석에 사용된 자료의 오류나 보완 자료를 알려주십시오.</h2>
+          <p>
+            이 자료는 현재 확보한 문서·공시·분석 결과를 바탕으로 작성되었습니다. 일부 값은 PDF 차트
+            판독치이거나 추가 확인이 필요한 자료일 수 있습니다. 수치, 출처, 해석에 오류가 있거나
+            보완할 원자료가 있다면 의견수렴에 남겨 주십시오. 확인 후 반영하겠습니다.
+          </p>
+        </div>
+        <a className="secondary-link" href="/board">
+          의견 남기기
+        </a>
+      </section>
 
       <section className="home-summary-section" aria-labelledby="home-overview-title">
         <div className="home-summary-grid">
