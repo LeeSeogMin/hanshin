@@ -42,6 +42,44 @@ export function MajorsDetail() {
         ))}
       </div>
 
+      {/* 3. 입지 검증 */}
+      <section className="eval-story">
+        <span className="kicker">{M.regionCheck.kicker}</span>
+        <h2>{M.regionCheck.title}</h2>
+        <p className="eval-lead">{M.regionCheck.lead}</p>
+        <div className="sim-table-wrap">
+          <table className="sim-table">
+            <thead>
+              <tr>
+                {M.regionCheck.table.head.map((h) => (
+                  <th key={h}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {M.regionCheck.table.rows.map((row) => (
+                <tr key={row[0]}>
+                  {row.map((cell, ci) => (
+                    <td key={ci} className={ci === 0 ? "row-label" : undefined}>
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="eval-support-grid">
+          {M.regionCheck.items.map((item) => (
+            <article className="eval-support-card" key={item.title}>
+              <h4>{item.title}</h4>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+        <p className="sim-caption">{M.regionCheck.source}</p>
+      </section>
+
       {/* 3. 신설이 만능이 아닌 이유 (3단계) */}
       <section className="eval-logic">
         <span className="kicker">{M.why.kicker}</span>
