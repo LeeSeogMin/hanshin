@@ -2053,3 +2053,14 @@ h2 {
 /* 3단 논리를 한신·평택 비교 펼치기 안에 넣었을 때 구분 */
 .eval-logic-nested { margin-top: 22px; padding-top: 20px; border-top: 1px dashed var(--line); }
 .eval-logic-nested h2 { font-size: clamp(19px, 2vw, 24px); }
+
+/* 계열제 보완 — 용어 풀이 박스 */
+.eval-glossary { margin-top: 30px; padding: clamp(20px, 3vw, 28px); border: 1px solid var(--line); border-radius: 10px; background: var(--surface-muted); }
+.eval-glossary h2 { font-size: clamp(20px, 2.2vw, 26px); margin-top: 4px; }
+.eval-glossary-list { margin: 16px 0 0; display: grid; gap: 12px; }
+.eval-glossary-item { display: grid; grid-template-columns: 160px minmax(0,1fr); gap: 14px; align-items: start; padding: 12px 0; border-top: 1px solid var(--line); }
+.eval-glossary-item dt { font-weight: 800; color: var(--teal-dark); font-size: 15px; }
+.eval-glossary-item dd { margin: 0; color: var(--ink); font-size: 15px; line-height: 1.65; }
+@media (max-width: 640px) {
+  .eval-glossary-item { grid-template-columns: 1fr; gap: 4px; }
+}
