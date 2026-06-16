@@ -2064,3 +2064,8 @@ h2 {
 @media (max-width: 640px) {
   .eval-glossary-item { grid-template-columns: 1fr; gap: 4px; }
 }
+
+/* 시뮬이 실제로 넣은 규칙 박스 */
+.eval-howmodeled { margin-top: 18px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.eval-howmodeled h4 { font-size: 15px; color: var(--teal-dark); }
+.eval-howmodeled .eval-glossary-list { margin-top: 10px; }

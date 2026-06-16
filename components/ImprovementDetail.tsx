@@ -83,6 +83,19 @@ export function ImprovementDetail() {
             </article>
           ))}
         </div>
+        {I.sims.howModeled ? (
+          <div className="eval-howmodeled">
+            <h4>{I.sims.howModeled.title}</h4>
+            <dl className="eval-glossary-list">
+              {I.sims.howModeled.items.map((it) => (
+                <div className="eval-glossary-item" key={it.term}>
+                  <dt>{it.term}</dt>
+                  <dd>{it.desc}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        ) : null}
         <p className="eval-figure-note">{I.sims.caveat}</p>
       </section>
 
