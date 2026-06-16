@@ -44,86 +44,16 @@ export function EvaluationDetail() {
         ))}
       </div>
 
-      {/* 3. 쉬운 그림 */}
-      <section className="eval-story">
-        <span className="kicker">{E.story.kicker}</span>
-        <h2>{E.story.title}</h2>
-        <p className="eval-lead">{E.story.lead}</p>
-        <figure className="eval-figure">
-          <div className="eval-figure-scroll">
-            <Image
-              src={E.story.image}
-              alt={E.story.imageAlt}
-              width={1180}
-              height={720}
-              priority
-              unoptimized
-            />
-          </div>
-        </figure>
-        <div className="eval-bars">
-          <p className="eval-bars-title">{E.story.barsTitle}</p>
-          {E.story.bars.map((bar) => (
-            <div className={`eval-bar-row ${bar.tone}`} key={bar.label}>
-              <span className="eval-bar-label">{bar.label}</span>
-              <span className="eval-bar-track">
-                <span className="eval-bar-fill" style={{ width: `${bar.pct}%` }}>
-                  <b>{bar.pct}%</b>
-                </span>
-              </span>
-              <span className="eval-bar-caption">{bar.caption}</span>
-            </div>
-          ))}
-        </div>
-        <p className="eval-figure-note">{E.story.note}</p>
-      </section>
-
-      {/* 4. 3단 논리 */}
-      <section className="eval-logic">
-        <span className="kicker">{E.logic.kicker}</span>
-        <h2>{E.logic.title}</h2>
-        <ol className="eval-logic-steps">
-          {E.logic.steps.map((step) => (
-            <li className="eval-logic-step" key={step.n}>
-              <span className="eval-step-num">{step.n}</span>
-              <div>
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* 6. 함께 봐야 할 사실 (접기) */}
-      <details className="fold-block eval-fold">
-        <summary className="fold-summary">
-          <span className="kicker">{E.supporting.kicker}</span>
-          <h3>{E.supporting.title}</h3>
-        </summary>
-        <div className="eval-support-grid">
-          {E.supporting.cards.map((card) => (
-            <article className="eval-support-card" key={card.title}>
-              <h4>{card.title}</h4>
-              <p>{card.body}</p>
-            </article>
-          ))}
-        </div>
-      </details>
-
-      {/* 7. 상세 분석 (전문가용) — SDID 복원 */}
-      <details className="fold-block eval-detail">
-        <summary className="fold-summary">
-          <span className="kicker">
-            <FlaskConical aria-hidden="true" size={15} />
-            상세 분석 · 방법론과 근거 (전문가용)
-          </span>
-          <h3>비슷한 대학과 비교(SDID) — 정밀 분석</h3>
-        </summary>
+      {/* 3. 핵심 분석 — SDID (메인·펼침) */}
+      <section className="eval-story eval-detail-main">
+        <span className="kicker">
+          <FlaskConical aria-hidden="true" size={15} />
+          핵심 분석 · 비슷한 대학과 비교(SDID)
+        </span>
+        <h2>한신대 vs 합성대조군 — 계열제 효과 직접검증(SDID)</h2>
         <p className="eval-detail-note">
-          아래는 방법론 용어(SDID·합성대조군·플라시보 등)가 포함된 전문 분석입니다. 결론은 위 본문과 같습니다 — 다른
-          후보가 기각되어 계열제가 사실상 유일 후보로 좁혀지나, ‘어떤 경로로’인지는 모집단위별 자료 전까지 단정하지
-          않습니다.
+          여기서부터는 방법론 용어(SDID·합성대조군·플라시보 등)가 포함된 정밀 분석입니다. 같은 내용을 쉬운 그림으로
+          본 ‘한신·평택 비교’는 아래에 접어 두었습니다.
         </p>
         <p className="eval-lead">{detail.lead}</p>
 
@@ -138,6 +68,7 @@ export function EvaluationDetail() {
               alt="한신대와 합성대조군(SDID)의 2016~2025 경쟁률 추이, 사양별 효과 추정치와 신뢰구간, 가짜 처치연도별 시간 플라시보를 보여주는 직접검증 그래프"
               width={1600}
               height={1040}
+              priority
               unoptimized
             />
           </div>
@@ -192,6 +123,68 @@ export function EvaluationDetail() {
             );
           })}
         </div>
+      </section>
+
+      {/* 4. 3단 논리 */}
+      <section className="eval-logic">
+        <span className="kicker">{E.logic.kicker}</span>
+        <h2>{E.logic.title}</h2>
+        <ol className="eval-logic-steps">
+          {E.logic.steps.map((step) => (
+            <li className="eval-logic-step" key={step.n}>
+              <span className="eval-step-num">{step.n}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* 6. 함께 봐야 할 사실 (접기) */}
+      <details className="fold-block eval-fold">
+        <summary className="fold-summary">
+          <span className="kicker">{E.supporting.kicker}</span>
+          <h3>{E.supporting.title}</h3>
+        </summary>
+        <div className="eval-support-grid">
+          {E.supporting.cards.map((card) => (
+            <article className="eval-support-card" key={card.title}>
+              <h4>{card.title}</h4>
+              <p>{card.body}</p>
+            </article>
+          ))}
+        </div>
+      </details>
+
+      {/* 7. 한신·평택 쉬운 비교 (접기) */}
+      <details className="fold-block eval-story-fold">
+        <summary className="fold-summary">
+          <span className="kicker">{E.story.kicker}</span>
+          <h3>{E.story.title} — 쉬운 비교(한신 vs 평택)</h3>
+        </summary>
+        <p className="eval-lead">{E.story.lead}</p>
+        <figure className="eval-figure">
+          <div className="eval-figure-scroll">
+            <Image src={E.story.image} alt={E.story.imageAlt} width={1180} height={720} unoptimized />
+          </div>
+        </figure>
+        <div className="eval-bars">
+          <p className="eval-bars-title">{E.story.barsTitle}</p>
+          {E.story.bars.map((bar) => (
+            <div className={`eval-bar-row ${bar.tone}`} key={bar.label}>
+              <span className="eval-bar-label">{bar.label}</span>
+              <span className="eval-bar-track">
+                <span className="eval-bar-fill" style={{ width: `${bar.pct}%` }}>
+                  <b>{bar.pct}%</b>
+                </span>
+              </span>
+              <span className="eval-bar-caption">{bar.caption}</span>
+            </div>
+          ))}
+        </div>
+        <p className="eval-figure-note">{E.story.note}</p>
       </details>
 
       {/* 8. 근거자료 폴더 (접기) */}
