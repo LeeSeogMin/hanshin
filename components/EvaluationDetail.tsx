@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowDown, FileSearch, FlaskConical, TriangleAlert } from "lucide-react";
+import { FileSearch, FlaskConical, TriangleAlert } from "lucide-react";
 import { cardEvidenceByMenu, evaluationPage as E, sections } from "@/lib/content";
 
 export function EvaluationDetail() {
@@ -31,10 +31,6 @@ export function EvaluationDetail() {
             <span>{E.hero.big.label}</span>
             <small>{E.hero.big.compare}</small>
           </div>
-          <a className="eval-hero-anchor" href={E.hero.anchorHref}>
-            {E.hero.anchorLabel}
-            <ArrowDown aria-hidden="true" size={18} />
-          </a>
         </div>
       </header>
 
@@ -97,14 +93,6 @@ export function EvaluationDetail() {
             </li>
           ))}
         </ol>
-      </section>
-
-      {/* 5. 결론을 가를 단 하나의 자료 */}
-      <section className="eval-decisive" id="decisive">
-        <span className="kicker">{E.decisive.kicker}</span>
-        <h2>{E.decisive.title}</h2>
-        <p>{E.decisive.body}</p>
-        <p className="eval-decisive-cta">{E.decisive.cta}</p>
       </section>
 
       {/* 6. 함께 봐야 할 사실 (접기) */}
