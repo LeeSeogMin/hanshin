@@ -235,6 +235,12 @@ export const sections = {
           "연기예술, 디자인, AI·SW 세분화는 주변 대학 경쟁률만으로 충분하지 않습니다. 한신대 지원층이 실제로 무엇을 보고 지원하는지(Conjoint)를 조사해야 합니다."
       },
       {
+        icon: LineChart,
+        title: "'이공계·AI = 입결 보장' 아님",
+        body:
+          "첨단·이공이라고 경쟁률이 보장되지 않습니다. 한신은 AI·SW에 투자(2024 SW중심대학)했지만 2026 AI·SW(4.3)·AI시스템반도체(4.7)·금융공학(4.1)이 학교평균(5.95) 미만이고, 미국에서도 CS 졸업생 실업률이 6.1%로 대졸 평균(4.8%)을 웃돕니다. 계열(이공/인문)이 아니라 직업 정체성·차별화가 경쟁률을 가릅니다."
+      },
+      {
         icon: Scale,
         title: "벤치마크의 함정",
         body:
@@ -432,7 +438,34 @@ export const cardEvidenceByMenu: Record<MenuKey, CardEvidence[][]> = {
         source: "수요조사(Conjoint) 미실시"
       }
     ],
-    // 2. 벤치마크의 함정
+    // 2. '이공계·AI = 입결 보장' 아님
+    [
+      {
+        grade: "확정·본교",
+        tone: "strong",
+        detail:
+          "한신 AI·SW(4.3)·AI시스템반도체(4.7)·금융공학(4.1)은 2026 입시경쟁률이 학교평균(5.95) 미만입니다. 2024년 SW중심대학(6년 55억, AI·SW 라이프케어)에 선정돼 첨단에 투자했지만 경쟁률은 평균을 넘지 못했습니다 — '이공계 강화=경쟁률 상승'은 한신에서 자동 성립하지 않습니다(인과가 아닌 단면 반례).",
+        source: "전공별 경쟁률 2026(판독치) · SW중심대학협의회",
+        url: "https://www.swuniv.kr/organization/?bmode=view&idx=24398259"
+      },
+      {
+        grade: "외부·국내",
+        tone: "caution",
+        detail:
+          "인문도 계열만으로 약세라 단정할 수 없습니다. 2026 철학과 학생부교과전형 경쟁률은 한양대 21.0:1·동국대 16.5:1·서울시립대 11.0:1·경희대 10.7:1로 보고됩니다. 단 명목 경쟁률이며 충원 규모(예: 성균관대 26명 충원)에 따라 체감 난도가 달라집니다.",
+        source: "에듀진 2026 철학과 교과전형 분석",
+        url: "https://www.edujin.co.kr/news/articleView.html?idxno=51572"
+      },
+      {
+        grade: "배경·해외(reference class)",
+        tone: "caution",
+        detail:
+          "글로벌에서도 '첨단=안전'은 흔들립니다. 미국은 최근 CS 졸업생 실업률 6.1%(컴퓨터공학 7.5%)로 전체 대졸 평균(4.8%)을 웃돌고, 2025–26 CS 전공 등록은 −11.2%로 전 학문 최대폭 감소했습니다. 단 이는 미국·취업/등록 지표로 한신 입시경쟁률과 측정 대상이 달라, 직접 근거가 아니라 통념을 깨는 배경 신호로만 봅니다.",
+        source: "미 뉴욕 연준 · CRA/CERP(2025)",
+        url: "https://cra.org/crn/2025/10/cerp-pulse-survey-a-snapshot-of-2025-undergraduate-computing-enrollment-patterns/"
+      }
+    ],
+    // 3. 벤치마크의 함정
     [
       {
         grade: "경쟁률 확인",
@@ -483,11 +516,11 @@ export const cardEvidenceByMenu: Record<MenuKey, CardEvidence[][]> = {
         url: "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=294&boardSeq=105011&lev=0&m=020402&opType=N&page=1&s=moe&searchType=null&statusYN=W&temp=Y"
       }
     ],
-    // 3. 교육역량 점검 — 근거 보기 생략(카드 본문과 동일, 추가 근거 없음)
+    // 4. 교육역량 점검 — 근거 보기 생략(카드 본문과 동일, 추가 근거 없음)
     [],
-    // 4. 기존 전공 잠식 점검 — 근거 보기 생략(카드 본문과 동일, 추가 근거 없음)
+    // 5. 기존 전공 잠식 점검 — 근거 보기 생략(카드 본문과 동일, 추가 근거 없음)
     [],
-    // 5. 단계적 전환
+    // 6. 단계적 전환
     [
       {
         grade: "대안",
