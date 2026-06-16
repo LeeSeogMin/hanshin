@@ -1,5 +1,15 @@
-import { IssuePage } from "@/components/IssuePage";
+import { DiscussionSection, ProcessSection, SiteFooter } from "@/components/CommonSections";
+import { MajorsDetail } from "@/components/MajorsDetail";
+import { SiteHeader } from "@/components/SiteHeader";
 
 export default function MajorsPage() {
-  return <IssuePage menuKey="majors" />;
+  return (
+    <main>
+      <SiteHeader activeKey="majors" />
+      <MajorsDetail />
+      <ProcessSection />
+      <DiscussionSection />
+      <SiteFooter />
+    </main>
+  );
 }
