@@ -71,6 +71,45 @@ export const evidenceCards = [
   }
 ];
 
+export const menuSummary: Record<
+  MenuKey,
+  { bottomLine: string; plain: string; signals: { tone: "strong" | "caution" | "open"; label: string; sub: string }[] }
+> = {
+  evaluation: {
+    bottomLine:
+      "계열제를 시작한 2023년부터 한신의 지원 하락폭은 비슷한 대학들보다 컸습니다. 단 '계열제 탓'이라 단정하긴 아직 이릅니다.",
+    plain:
+      "같은 학령인구 감소를 겪은 비슷한 대학들과 나란히 두면 한신의 하락이 더 크게 보입니다. 그게 계열제 하나 때문인지, 일부 전공·브랜드·정부정책이 겹친 탓인지는 아직 못 갈라냈습니다.",
+    signals: [
+      { tone: "strong", label: "확정", sub: "하락은 분명" },
+      { tone: "caution", label: "쟁점", sub: "원인은 덜 갈림" },
+      { tone: "open", label: "미조사", sub: "수험생 수요 모름" }
+    ]
+  },
+  improvement: {
+    bottomLine:
+      "전공 쏠림은 이미 실재합니다. 자율성을 더 넓힌다면 '상한 수치'가 아니라 동반 '장치(메커니즘)'가 취약 전공 보호와 자율성을 동시에 좌우합니다.",
+    plain:
+      "지금도 학생들이 일부 인기 전공으로 몰립니다. 선택 폭을 더 넓히면 쏠림은 더 커지지만, 넛지·학과보호 같은 장치를 함께 두면 인기·비인기 전공을 둘 다 지키면서 자율성도 유지할 수 있어요.",
+    signals: [
+      { tone: "strong", label: "확정", sub: "편중은 실재" },
+      { tone: "strong", label: "설계로 해결", sub: "장치가 관건" },
+      { tone: "open", label: "미검증", sub: "자율성→지원 효과" }
+    ]
+  },
+  majors: {
+    bottomLine:
+      "신설은 지금 시급·필수가 아닙니다(충원율 100%). 만든다면 수요만이 아니라 정체성·교육역량까지 6가지 기준을 통과한 후보여야 합니다.",
+    plain:
+      "당장 정원이 미달은 아니고, 새 전공은 성과까지 4~6년 걸립니다. '수요 있으니 만든다'는 한신이 이미 만든 융합전공이 약체인 것으로 반증됩니다. 만든다면 연기예술 외에 정체성에 맞는 대안까지 같은 기준으로 비교해야 합니다.",
+    signals: [
+      { tone: "caution", label: "시급성", sub: "지금 미달 아님" },
+      { tone: "strong", label: "원칙", sub: "6기준으로 선정" },
+      { tone: "open", label: "미조사", sub: "한신 지원층 수요" }
+    ]
+  }
+};
+
 export const sections = {
   evaluation: {
     key: "evaluation" as const,

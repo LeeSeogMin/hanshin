@@ -4,6 +4,7 @@ import {
   gapsByMenu,
   menuBlockLabels,
   menuItems,
+  menuSummary,
   sections,
   simBlocksByMenu,
   type MenuKey
@@ -21,6 +22,7 @@ export function IssueDetail({ menuKey }: IssueDetailProps) {
   const activeGaps = gapsByMenu[menuKey];
   const blockLabels = menuBlockLabels[menuKey];
   const activeSim = simBlocksByMenu[menuKey];
+  const summary = menuSummary[menuKey];
 
   return (
     <section className="detail-section issue-detail-page" aria-labelledby={`${menuKey}-title`}>
@@ -33,6 +35,22 @@ export function IssueDetail({ menuKey }: IssueDetailProps) {
           <h1 id={`${menuKey}-title`}>{active.heading}</h1>
           <p>{active.lead}</p>
         </div>
+      </div>
+
+      <div className="bluf-card">
+        <p className="bluf-line">{summary.bottomLine}</p>
+        <div className="bluf-signals">
+          {summary.signals.map((s) => (
+            <span className={`bluf-signal ${s.tone}`} key={s.label}>
+              <strong>{s.label}</strong>
+              <small>{s.sub}</small>
+            </span>
+          ))}
+        </div>
+        <p className="bluf-plain">
+          <span className="bluf-tag">쉽게 말하면</span>
+          {summary.plain}
+        </p>
       </div>
 
       <div className="metric-row">
@@ -69,11 +87,11 @@ export function IssueDetail({ menuKey }: IssueDetailProps) {
         </ul>
       </div>
 
-      <div className="evidence-block">
-        <div className="block-heading">
+      <details className="fold-block">
+        <summary className="fold-summary">
           <span className="kicker">{blockLabels.evidenceKicker}</span>
           <h3>{blockLabels.evidenceTitle}</h3>
-        </div>
+        </summary>
         <div className="evidence-list">
           {activeEvidence.map((item) => (
             <article className={`evidence-item ${item.tone}`} key={item.title}>
@@ -84,14 +102,14 @@ export function IssueDetail({ menuKey }: IssueDetailProps) {
             </article>
           ))}
         </div>
-      </div>
+      </details>
 
       {activeSim ? (
-        <div className="sim-block">
-          <div className="block-heading">
+        <details className="fold-block">
+          <summary className="fold-summary">
             <span className="kicker">{activeSim.kicker}</span>
             <h3>{activeSim.title}</h3>
-          </div>
+          </summary>
           <p className="gap-lead">{activeSim.lead}</p>
           <div className="sim-grid">
             {activeSim.tables.map((table) => (
@@ -124,17 +142,17 @@ export function IssueDetail({ menuKey }: IssueDetailProps) {
             ))}
           </div>
           <p className="sim-note">{activeSim.note}</p>
-        </div>
+        </details>
       ) : null}
 
-      <div className="gap-block">
-        <div className="block-heading">
+      <details className="fold-block">
+        <summary className="fold-summary">
           <span className="kicker gap-kicker">
             <TriangleAlert aria-hidden="true" size={15} />
             {blockLabels.gapKicker}
           </span>
           <h3>{blockLabels.gapTitle}</h3>
-        </div>
+        </summary>
         <p className="gap-lead">{blockLabels.gapLead}</p>
         <div className="gap-grid">
           {activeGaps.map((gap) => (
@@ -156,7 +174,7 @@ export function IssueDetail({ menuKey }: IssueDetailProps) {
             </article>
           ))}
         </div>
-      </div>
+      </details>
     </section>
   );
 }

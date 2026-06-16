@@ -949,6 +949,133 @@ h2 {
   }
 }
 
+.bluf-card {
+  margin-top: 16px;
+  padding: 20px;
+  border: 1px solid rgba(30, 111, 103, 0.28);
+  border-radius: 10px;
+  background: linear-gradient(170deg, var(--green-soft), var(--surface));
+}
+
+.bluf-line {
+  font-size: clamp(18px, 2.6vw, 23px);
+  font-weight: 800;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.bluf-signals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.bluf-signal {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.bluf-signal strong {
+  font-size: 13px;
+}
+
+.bluf-signal small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.bluf-signal.strong {
+  border-color: rgba(30, 111, 103, 0.4);
+}
+.bluf-signal.strong strong {
+  color: var(--teal-dark);
+}
+.bluf-signal.caution {
+  border-color: rgba(184, 121, 30, 0.45);
+}
+.bluf-signal.caution strong {
+  color: #7c551c;
+}
+.bluf-signal.open {
+  border-color: rgba(183, 83, 83, 0.4);
+}
+.bluf-signal.open strong {
+  color: #8f3c3c;
+}
+
+.bluf-plain {
+  margin-top: 16px;
+  color: #3f4a45;
+  font-size: 15px;
+  line-height: 1.72;
+  word-break: keep-all;
+}
+
+.bluf-tag {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 1px 9px;
+  border-radius: 999px;
+  background: var(--gold-soft);
+  color: #7c551c;
+  font-size: 12px;
+  font-weight: 800;
+  vertical-align: 2px;
+}
+
+.fold-block {
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.fold-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 16px 18px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.fold-summary::-webkit-details-marker {
+  display: none;
+}
+
+.fold-summary::after {
+  content: "펼치기 ▾";
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.fold-block[open] > .fold-summary::after {
+  content: "접기 ▴";
+}
+
+.fold-summary h3 {
+  font-size: clamp(17px, 2.2vw, 21px);
+}
+
+.fold-summary .kicker {
+  margin-bottom: 0;
+}
+
+.fold-block > *:not(.fold-summary) {
+  margin-right: 18px;
+  margin-bottom: 18px;
+  margin-left: 18px;
+}
+
 .process-section {
   padding-top: 20px;
   padding-bottom: 46px;
