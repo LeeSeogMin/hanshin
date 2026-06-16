@@ -41,7 +41,7 @@ export default function Home() {
     <main>
       <SiteHeader activeKey="home" />
       <MainHero />
-      <IssueMenuGrid homeMode />
+      <IssueMenuGrid />
 
       <section className="source-correction-notice" aria-labelledby="source-correction-title">
         <div>
