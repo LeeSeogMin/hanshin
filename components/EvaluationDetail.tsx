@@ -125,24 +125,7 @@ export function EvaluationDetail() {
         </div>
       </section>
 
-      {/* 4. 3단 논리 */}
-      <section className="eval-logic">
-        <span className="kicker">{E.logic.kicker}</span>
-        <h2>{E.logic.title}</h2>
-        <ol className="eval-logic-steps">
-          {E.logic.steps.map((step) => (
-            <li className="eval-logic-step" key={step.n}>
-              <span className="eval-step-num">{step.n}</span>
-              <div>
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* 5. 한신·평택 쉬운 비교 (접기) — 위 3단 논리의 그림 근거 */}
+      {/* 4. 한신·평택 쉬운 비교 (접기) — 아래 3단 논리의 그림 근거 */}
       <details className="fold-block eval-story-fold">
         <summary className="fold-summary">
           <span className="kicker">{E.story.kicker}</span>
@@ -170,6 +153,23 @@ export function EvaluationDetail() {
         </div>
         <p className="eval-figure-note">{E.story.note}</p>
       </details>
+
+      {/* 5. 3단 논리 — 위 한신·평택 비교를 단계로 정리 */}
+      <section className="eval-logic">
+        <span className="kicker">{E.logic.kicker}</span>
+        <h2>{E.logic.title}</h2>
+        <ol className="eval-logic-steps">
+          {E.logic.steps.map((step) => (
+            <li className="eval-logic-step" key={step.n}>
+              <span className="eval-step-num">{step.n}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
 
       {/* 6. 함께 봐야 할 사실 (접기) */}
       <details className="fold-block eval-fold">
