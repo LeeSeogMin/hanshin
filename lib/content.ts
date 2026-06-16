@@ -370,8 +370,8 @@ export const sections = {
 export const evaluationPage = {
   eyebrow: "진단 · 계열제 평가",
   hero: {
-    headline: "한신만 계속 빠졌습니다.",
-    headlineSub: "다만 작용 경로는 아직 분해 중입니다.",
+    headline: "비슷한 대학들은 회복했지만, 한신은 아직입니다.",
+    headlineSub: "그 원인과 작용 방식은 더 살핍니다.",
     badges: [
       { tone: "fact" as const, label: "확정", text: "비슷한 대학은 회복했는데 한신만 더 떨어졌습니다" },
       { tone: "open" as const, label: "아직 모름", text: "계열제가 ‘어떻게’ 그랬는지는 못 가렸습니다" }
