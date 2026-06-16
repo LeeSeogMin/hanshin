@@ -83,7 +83,9 @@ export function IssueDetail({ menuKey }: IssueDetailProps) {
           <figcaption>
             data.xlsx 전국 패널을 1차 원자료로 SDID(합성대조군)를 직접 재현한 결과입니다(재현 스크립트:
             scripts/sdid_replication.py). 비교군 대비 초과 하락의 <strong>방향은 강건</strong>하나, 신뢰구간이
-            넓고 효과의 상당 부분이 <strong>2022년 선행 급락</strong>(계열제 도입 1년 전)에 귀속되어 ‘계열제
+            넓고 효과의 약 86%가 <strong>2022년 선행 급락</strong>(계열제 도입 1년 전)에 귀속됩니다. 그 2022 급락의
+            1순위 원인은 <strong>적성고사 폐지</strong>(2022학년도 전국 폐지·계열제 무관)로 외부 검증됐고, 같은 적성
+            동질군(평택 등)이 회복하는 동안 한신만 2023~2026 추가 하락한 구간이 계열제 후보로 남습니다 — 따라서 ‘계열제
             단일 순효과’로 단정할 수 없습니다.
           </figcaption>
         </figure>
