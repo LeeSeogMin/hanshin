@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="720" viewBox="0 0 1180 720">
+<style>text{font-family:Apple SD Gothic Neo,Malgun Gothic,Noto Sans KR,Arial,sans-serif;}</style>
+<rect x="0" y="0" width="1180" height="720" fill="#ffffff"/>
+<text x="590.0" y="56.0" font-size="32" fill="#1b1f1e" font-weight="800" text-anchor="middle">같은 충격, 다른 결과</text>
+<text x="590.0" y="90.0" font-size="17" fill="#5b6360" font-weight="400" text-anchor="middle">한신대와 비슷한 조건의 평택대 — 입시 경쟁률(지원자÷모집인원)</text>
+<polyline points="150.0,530.0 1030.0,530.0" fill="none" stroke="#ece9e0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="134.0" y="535.0" font-size="14" fill="#9aa19d" font-weight="400" text-anchor="end">4</text>
+<polyline points="150.0,403.3 1030.0,403.3" fill="none" stroke="#ece9e0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="134.0" y="408.3" font-size="14" fill="#9aa19d" font-weight="400" text-anchor="end">6</text>
+<polyline points="150.0,276.7 1030.0,276.7" fill="none" stroke="#ece9e0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="134.0" y="281.7" font-size="14" fill="#9aa19d" font-weight="400" text-anchor="end">8</text>
+<polyline points="150.0,150.0 1030.0,150.0" fill="none" stroke="#ece9e0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="134.0" y="155.0" font-size="14" fill="#9aa19d" font-weight="400" text-anchor="end">10</text>
+<polyline points="150.0,150.0 150.0,530.0" fill="none" stroke="#f3f1ea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="150.0" y="564.0" font-size="18" fill="#3a403d" font-weight="700" text-anchor="middle">2021</text>
+<text x="150.0" y="588.0" font-size="14" fill="#8a918d" font-weight="400" text-anchor="middle">(적성고사 폐지 직전)</text>
+<polyline points="590.0,150.0 590.0,530.0" fill="none" stroke="#f3f1ea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="590.0" y="564.0" font-size="18" fill="#3a403d" font-weight="700" text-anchor="middle">2022</text>
+<text x="590.0" y="588.0" font-size="14" fill="#8a918d" font-weight="400" text-anchor="middle">(전국 공통 충격)</text>
+<polyline points="1030.0,150.0 1030.0,530.0" fill="none" stroke="#f3f1ea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1030.0" y="564.0" font-size="18" fill="#3a403d" font-weight="700" text-anchor="middle">2026</text>
+<text x="1030.0" y="588.0" font-size="14" fill="#8a918d" font-weight="400" text-anchor="middle">(현재)</text>
+<text x="606.0" y="178.0" font-size="15" fill="#b07a1e" font-weight="700" text-anchor="start">← 둘 다 급락: 2022년 전국에서 적성고사가 사라진 영향(계열제와 무관)</text>
+<polyline points="150.0,200.7 590.0,321.0 1030.0,258.9" fill="none" stroke="#1f9d8a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="150.0,207.0 590.0,333.7 1030.0,408.4" fill="none" stroke="#e05a4f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="150.0" cy="200.7" r="8" fill="#1f9d8a" stroke="white" stroke-width="3"/>
+<circle cx="590.0" cy="321.0" r="8" fill="#1f9d8a" stroke="white" stroke-width="3"/>
+<circle cx="1030.0" cy="258.9" r="8" fill="#1f9d8a" stroke="white" stroke-width="3"/>
+<circle cx="150.0" cy="207.0" r="8" fill="#e05a4f" stroke="white" stroke-width="3"/>
+<circle cx="590.0" cy="333.7" r="8" fill="#e05a4f" stroke="white" stroke-width="3"/>
+<circle cx="1030.0" cy="408.4" r="8" fill="#e05a4f" stroke="white" stroke-width="3"/>
+<text x="1046.0" y="260.9" font-size="19" fill="#157567" font-weight="800" text-anchor="start">평택대  8.3</text>
+<text x="1046.0" y="284.9" font-size="15" fill="#157567" font-weight="600" text-anchor="start">↑ 거의 회복</text>
+<text x="1046.0" y="410.4" font-size="19" fill="#c0392b" font-weight="800" text-anchor="start">한신대  5.9</text>
+<text x="1046.0" y="434.4" font-size="15" fill="#c0392b" font-weight="600" text-anchor="start">↓ 계속 하락</text>
+<text x="134.0" y="205.7" font-size="16" fill="#157567" font-weight="700" text-anchor="end">9.2</text>
+<text x="134.0" y="227.0" font-size="16" fill="#c0392b" font-weight="700" text-anchor="end">9.1</text>
+<rect x="60" y="628" width="1060" height="64" rx="12" fill="#fbf6ec" stroke="#ecdfc4"/>
+<text x="590.0" y="660.0" font-size="18" fill="#7a5a12" font-weight="800" text-anchor="middle">같은 충격을 받았는데 한 곳만 안 돌아왔습니다.</text>
+<text x="590.0" y="684.0" font-size="15" fill="#8a7240" font-weight="400" text-anchor="middle">이 차이는 한신이 2023년에 바꾼 것을 가리킵니다 — 무엇이 &#x27;어떻게&#x27;였는지는 추가 자료로 가립니다.</text>
+</svg>

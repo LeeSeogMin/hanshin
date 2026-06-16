@@ -1919,3 +1919,116 @@ h2 {
     min-height: 132px;
   }
 }
+
+/* ===== 계열제 평가 전용(EvaluationDetail) — 비전공자용 재구성 ===== */
+.eval-page { padding-top: 42px; }
+.eval-page h2 { font-size: clamp(22px, 2.4vw, 30px); line-height: 1.2; margin-top: 6px; }
+
+/* 1. 히어로 */
+.eval-hero {
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.eval-hero-h1 {
+  margin-top: 10px;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+.eval-hero-sub {
+  display: block;
+  margin-top: 6px;
+  color: var(--rose);
+  font-size: clamp(20px, 2.4vw, 30px);
+  font-weight: 700;
+}
+.eval-hero-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.eval-badge {
+  flex: 1 1 260px;
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 14px 16px; border-radius: 8px;
+  font-size: 15px; line-height: 1.5; color: var(--ink);
+}
+.eval-badge strong { font-size: 13px; letter-spacing: 0.02em; }
+.eval-badge.fact { background: var(--rose-soft); border: 1px solid #e7c7c0; }
+.eval-badge.fact strong { color: #a23b34; }
+.eval-badge.open { background: var(--surface-muted); border: 1px solid var(--line); color: var(--muted); }
+.eval-badge.open strong { color: #6c726c; }
+.eval-hero-figure {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 18px; margin-top: 24px; padding-top: 22px; border-top: 1px dashed var(--line);
+}
+.eval-hero-big { display: flex; flex-direction: column; gap: 2px; }
+.eval-hero-big strong { font-size: clamp(40px, 6vw, 60px); color: var(--rose); line-height: 1; letter-spacing: -0.02em; }
+.eval-hero-big span { margin-top: 6px; font-weight: 700; color: var(--ink); }
+.eval-hero-big small { color: var(--muted); font-size: 14px; }
+.eval-hero-anchor {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 18px; border-radius: 999px;
+  background: var(--teal); color: #fff; font-weight: 700; font-size: 15px;
+  text-decoration: none; transition: background .15s;
+}
+.eval-hero-anchor:hover { background: var(--teal-dark); }
+
+/* 2. 신호등 */
+.eval-signals { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.eval-signals .bluf-signal { flex: 1 1 200px; }
+
+/* 3. 쉬운 그림 */
+.eval-story, .eval-logic, .eval-decisive { margin-top: 30px; }
+.eval-lead { max-width: 880px; margin-top: 10px; color: var(--muted); font-size: 17px; line-height: 1.72; }
+.eval-figure { margin: 18px 0 0; }
+.eval-figure-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.eval-figure-scroll img { width: 100%; min-width: 640px; height: auto; display: block; }
+.eval-bars { margin-top: 20px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.eval-bars-title { font-weight: 700; color: var(--ink); font-size: 15px; }
+.eval-bar-row { display: grid; grid-template-columns: 72px minmax(0,1fr) auto; align-items: center; gap: 12px; margin-top: 12px; }
+.eval-bar-label { font-weight: 700; font-size: 15px; }
+.eval-bar-track { height: 26px; border-radius: 999px; background: var(--surface-muted); overflow: hidden; }
+.eval-bar-fill { display: flex; align-items: center; justify-content: flex-end; height: 100%; border-radius: 999px; padding-right: 10px; }
+.eval-bar-fill b { color: #fff; font-size: 13px; }
+.eval-bar-row.recover .eval-bar-fill { background: var(--teal); }
+.eval-bar-row.drop .eval-bar-fill { background: var(--rose); }
+.eval-bar-caption { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.eval-figure-note { margin-top: 16px; padding: 14px 16px; border-radius: 8px; background: var(--gold-soft); color: #7a5a12; font-size: 15px; line-height: 1.6; }
+
+/* 4. 3단 논리 */
+.eval-logic-steps { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; }
+.eval-logic-step { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 16px; align-items: start; padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.eval-step-num { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; background: var(--ink); color: #fff; font-weight: 800; font-size: 17px; }
+.eval-logic-step h3 { font-size: 18px; line-height: 1.35; }
+.eval-logic-step p { margin-top: 8px; color: var(--muted); font-size: 16px; line-height: 1.7; }
+
+/* 5. 결론을 가를 단 하나의 자료 */
+.eval-decisive { padding: clamp(22px, 3.5vw, 34px); border: 2px solid var(--teal); border-radius: 10px; background: var(--green-soft); }
+.eval-decisive .kicker { color: var(--teal-dark); }
+.eval-decisive p { margin-top: 10px; color: #2c3a36; font-size: 17px; line-height: 1.72; max-width: 880px; }
+.eval-decisive-cta { font-weight: 800; color: var(--teal-dark) !important; }
+
+/* 6. 보조 사실 */
+.eval-support-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 14px; }
+.eval-support-card { padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.eval-support-card h4 { font-size: 16px; line-height: 1.4; }
+.eval-support-card p { margin-top: 8px; color: var(--muted); font-size: 15px; line-height: 1.65; }
+
+/* 8. 근거자료 폴더 */
+.eval-evidence-tiers { display: grid; gap: 12px; margin-top: 14px; }
+.eval-evidence-tier { display: grid; grid-template-columns: 110px minmax(0,1fr); gap: 14px; align-items: start; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.eval-evidence-grade { font-weight: 800; font-size: 13px; color: var(--teal-dark); padding: 4px 0; }
+.eval-evidence-tier ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.eval-evidence-tier li { display: flex; flex-direction: column; gap: 2px; }
+.eval-evidence-tier a { font-weight: 700; color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+.eval-evidence-name { font-weight: 700; color: var(--ink); }
+.eval-evidence-tier small { color: var(--muted); font-size: 13px; }
+.eval-evidence-safety { display: flex; align-items: center; gap: 8px; margin-top: 14px; color: var(--muted); font-size: 13px; }
+
+@media (max-width: 640px) {
+  .eval-hero-figure { flex-direction: column; align-items: flex-start; }
+  .eval-hero-anchor { width: 100%; justify-content: center; }
+  .eval-bar-row { grid-template-columns: 56px minmax(0,1fr); }
+  .eval-bar-caption { grid-column: 2; }
+  .eval-evidence-tier { grid-template-columns: 1fr; gap: 6px; }
+}
