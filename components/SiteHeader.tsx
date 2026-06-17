@@ -4,7 +4,7 @@ import { useState } from "react";
 import { House, Menu, MessageSquareText, X } from "lucide-react";
 import { menuItems, type MenuKey } from "@/lib/content";
 
-export type NavKey = "home" | MenuKey;
+export type NavKey = "home" | MenuKey | "future";
 
 type SiteHeaderProps = {
   activeKey?: NavKey;
