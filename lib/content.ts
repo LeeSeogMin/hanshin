@@ -1499,7 +1499,7 @@ export const processSteps = [
   },
   {
     title: "쟁점 숙의",
-    body: "네 메뉴별 반대 논거와 데이터 공백 확인",
+    body: "다섯 메뉴별 반대 논거와 데이터 공백 확인",
     icon: Compass
   },
   {
