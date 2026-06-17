@@ -2148,7 +2148,7 @@ h2 {
 .eval-logic-nested { margin-top: 22px; padding-top: 20px; border-top: 1px dashed var(--line); }
 .eval-logic-nested h2 { font-size: clamp(19px, 2vw, 24px); }
 
-/* 계열제 보완 — 용어 풀이 박스 */
+/* 전공운영 재설계 — 용어 풀이 박스 */
 .eval-glossary { margin-top: 30px; padding: clamp(20px, 3vw, 28px); border: 1px solid var(--line); border-radius: 10px; background: var(--surface-muted); }
 .eval-glossary h2 { font-size: clamp(20px, 2.2vw, 26px); margin-top: 4px; }
 .eval-glossary-list { margin: 16px 0 0; display: grid; gap: 12px; }
@@ -2163,6 +2163,18 @@ h2 {
 .eval-howmodeled { margin-top: 18px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
 .eval-howmodeled h4 { font-size: 15px; color: var(--teal-dark); }
 .eval-howmodeled .eval-glossary-list { margin-top: 10px; }
+
+/* 전공운영 재설계 — 축 하위 메뉴 */
+.pillar-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.pillar-nav-pill { display: inline-flex; align-items: center; padding: 9px 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--teal-dark); font-size: 14px; font-weight: 600; text-decoration: none; transition: background .15s, border-color .15s; }
+.pillar-nav-pill:hover { background: var(--teal-dark); border-color: var(--teal-dark); color: #fff; }
+.pillar-header { margin-top: 40px; padding-bottom: 10px; border-bottom: 2px solid var(--teal-dark); font-size: 20px; color: var(--teal-dark); scroll-margin-top: 80px; }
+.pillar-points { margin-top: 18px; }
+.pillar-framing { margin-top: 18px; }
+.pillar-table { margin-top: 18px; }
+.pillar-stance-grid { margin-top: 18px; }
+.pillar-stance { border-color: var(--teal-dark); border-width: 2px; background: var(--teal-soft, #eef5f3); }
+.pillar-stance h4 { color: var(--teal-dark); }
 
 /* AI 시대 미래전략 — '하지 말 것' 목록 */
 .future-avoid-list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }

@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import { MessageSquarePlus, RefreshCw, Send } from "lucide-react";
 import { type BoardPost, isSupabaseConfigured, supabase } from "@/lib/supabase";
 
-const categories = ["계열제 평가", "계열제 보완", "전공신설", "기타"] as const;
+const categories = ["계열제 평가", "전공운영 재설계", "전공신설", "기타"] as const;
 
 type FormState = {
   author_name: string;
