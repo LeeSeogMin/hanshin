@@ -14,7 +14,8 @@ import {
   Scale,
   ShieldCheck,
   Sparkles,
-  Target
+  Target,
+  Users
 } from "lucide-react";
 
 export type MenuKey = "evaluation" | "cases" | "improvement" | "majors";
@@ -29,6 +30,16 @@ export const menuItems = [
     description:
       "경쟁률 하락, 비교군 대비 초과 하락, 전형별 분해 공백을 구분해 계열제 평가의 출발선을 정리합니다.",
     icon: BarChart3
+  },
+  {
+    key: "demand" as const,
+    href: "/demand",
+    label: "수요조사",
+    eyebrow: "수요",
+    title: "한신에 지원하는 고3은 무엇을 보고 지원하나 — 아직 직접 물어본 적이 없다",
+    description:
+      "재학생 의견과 외부 자료로 좁히고, 비어 있는 ‘고3 직접 수요’를 메울 조사 설계까지 모았습니다.",
+    icon: Users
   },
   {
     key: "improvement" as const,
@@ -81,34 +92,60 @@ export const evaluationSubItems = [
   }
 ];
 
+export type DemandSubKey = "students" | "external" | "survey";
+
+export const demandSubItems = [
+  {
+    key: "students" as const,
+    href: "/demand",
+    label: "재학생 의견",
+    description: "2024 재학생 만족도조사에서 본 전공·융합 우선순위.",
+    icon: BarChart3
+  },
+  {
+    key: "external" as const,
+    href: "/demand/external",
+    label: "외부 자료",
+    description: "타 대학 무전공 경쟁률·수험생 설문 등 외부 증거.",
+    icon: Compass
+  },
+  {
+    key: "survey" as const,
+    href: "/demand/survey",
+    label: "수요조사안",
+    description: "고3 직접 수요를 측정할 Conjoint 실사 설계.",
+    icon: FileQuestion
+  }
+];
+
 export type ImprovementSubKey = "incremental" | "stability" | "balance" | "multimajor";
 
 export const improvementSubItems = [
   {
     key: "incremental" as const,
     href: "/improvement",
-    label: "② 전면 → 증분형",
+    label: "전면 계열제를 증분형으로",
     description: "무전공은 정부 정책·전국 표준. 폐지가 아니라 증분형으로 보조 맞추기.",
     icon: ArrowRightLeft
   },
   {
     key: "stability" as const,
     href: "/improvement/stability",
-    label: "③ 전형·제도 안정화",
+    label: "전형제도 안정화",
     description: "잦은 입시전형·제도 변경이 수험생 혼란을 키운다. 다년 고정.",
     icon: ShieldCheck
   },
   {
     key: "balance" as const,
     href: "/improvement/balance",
-    label: "① 쏠림을 막는 설계",
-    description: "상한 수치가 아니라 넛지·학과보호 메커니즘이 본체.",
+    label: "쏠림을 막는 설계",
+    description: "상한 수치가 아니라 하한보장·단계개방·조기경보가 본체.",
     icon: Scale
   },
   {
     key: "multimajor" as const,
     href: "/improvement/multimajor",
-    label: "④ 다전공 의무화",
+    label: "다전공 의무화",
     description: "다전공 의무화의 부담·설계 쟁점을 본다.",
     icon: GraduationCap
   }
@@ -290,6 +327,255 @@ export const casesPage = {
   }
 };
 
+// ── 수요조사 메뉴 전용 (3개 하위 페이지). DemandDetail.tsx가 사용. ──
+// 원칙: 재학생·외부 자료는 ‘고3 직접 수요’를 대체하지 못한다(공백 명시).
+//       외부 수치는 언론·입시기관 2차 인용 → "확인 필요". 인과 단정 금지(상관·정황).
+// 근거: docs/만족도조사.pdf(2024 재학생 607명, 표 261~268),
+//       docs/입시결과분석/수험생수요_외부검증_v1.md, 수요조사_Conjoint_실행안_v1.md.
+export type DemandPage = {
+  eyebrow: string;
+  hero: {
+    headline: string;
+    headlineSub: string;
+    badges: { tone: string; label: string; text: string }[];
+    big: { value: string; label: string; compare: string };
+  };
+  signals: { tone: string; label: string; sub: string }[];
+  story: { kicker: string; title: string; body: string };
+  cards: { kicker: string; title: string; items: { title: string; body: string }[] };
+  sources: { kicker: string; title: string; items: { name: string; desc: string; href?: string }[] };
+  questions: { kicker: string; title: string; items: string[] };
+};
+
+export const demandPages: Record<DemandSubKey, DemandPage> = {
+  students: {
+    eyebrow: "수요 · 재학생 의견",
+    hero: {
+      headline: "이미 들어온 학생도, 전공과 취업을 먼저 봅니다.",
+      headlineSub:
+        "2024 재학생 607명 조사에서 ‘융합·교양’은 우선순위 맨 아래였습니다. 단 이것은 지원자(고3)가 아니라 ‘다녀 본 재학생’의 목소리입니다.",
+      badges: [
+        { tone: "fact", label: "확정", text: "재학생이 꼽은 발전방향 1·2순위는 전공교육(28.3%)·취업(24.1%)" },
+        { tone: "open", label: "유의", text: "재학생 의견 ≠ 고3의 지원 동기 — 직접 대체할 수 없습니다" }
+      ],
+      big: {
+        value: "20.1%",
+        label: "‘창의융합 교육과정 혁신’을 중점 과제로 꼽은 비율",
+        compare: "전공교육·취업(합 52.4%)의 절반에도 못 미칩니다"
+      }
+    },
+    signals: [
+      { tone: "strong", label: "확정", sub: "전공·취업 우선" },
+      { tone: "caution", label: "해석", sub: "우선순위 문제" },
+      { tone: "open", label: "한계", sub: "고3 아님" }
+    ],
+    story: {
+      kicker: "무엇을 물었나",
+      title: "2024 한신대 재학생 만족도조사 (607명)",
+      body:
+        "한신대가 재학생 607명을 대상으로 2024년 4~5월 실시한 만족도조사입니다. 학과·학년 비례할당 온라인 조사로, ‘입학 후 만족도’를 묻습니다. 따라서 이 자료는 ‘지원 시점의 선택 이유’가 아니라 ‘다녀 본 학생의 우선순위’를 보여줍니다 — 고3의 지원 동기를 직접 대신하지는 못합니다."
+    },
+    cards: {
+      kicker: "조사가 말하는 것",
+      title: "재학생 데이터에서 본 네 가지",
+      items: [
+        {
+          title: "발전방향 1·2순위 — 전공교육·취업이 압도",
+          body:
+            "중장기 발전방향 고려사항(1순위)에서 전공교육 28.3%, 취업 24.1%가 1·2위였고, 교양교육은 0.5%로 최하위권이었습니다. ‘다녀 본 학생’조차 전공 정체성과 취업을 가장 앞에 둡니다. [만족도조사 표 267]"
+        },
+        {
+          title: "중점 과제 — 융합은 3위(20.1%)에 그침",
+          body:
+            "5대 전략목표 중 ‘학생자치기반 교육지원 강화’가 41.0%로 1위, ‘창의융합 PLATFORM 교육과정 혁신’은 20.1%로 3위였습니다. 융합을 1위로 꼽은 곳은 AI·SW대학(38.5%)에 쏠렸고, 직업 정체성이 뚜렷한 학과는 낮았습니다. [표 262·263]"
+        },
+        {
+          title: "융합 지지자의 이유 = 담론의 복창",
+          body:
+            "‘창의융합’을 고른 122명의 이유는 ‘창의융합이 경쟁력’(15.6%)·‘변하는 사회, 융복합 인재 필요’(7.4%)·‘4차산업 대비’(4.1%)였습니다. 자생적 수요라기보다 공급자 담론을 학생이 그대로 옮긴 형태에 가깝습니다. [표 266]"
+        },
+        {
+          title: "자유응답에 ‘계열제 폐지’가 직접 등장",
+          body:
+            "전공교육 선택 이유 자유응답에 ‘계열제도가 폐지되어야 한다’(1.2%), 개선사항에 ‘전공 과목이 다양하지 않다’(1.2%)·‘계열에 대한 제도/관심이 있어야 한다’(1.2%)가 나왔습니다. 비율은 작지만, 묻지 않은 자유응답에서 자발적으로 나온 신호입니다. [표 268·261]"
+        }
+      ]
+    },
+    sources: {
+      kicker: "근거 자료",
+      title: "수치 출처",
+      items: [
+        { name: "2024 한신대학교 재학생 만족도 조사 보고서", desc: "원문 PDF · 표 261~268 (607명, 2024.04~05)" }
+      ]
+    },
+    questions: {
+      kicker: "공론 질문",
+      title: "재학생 의견에서 먼저 갈라야 할 질문",
+      items: [
+        "재학생의 입학 후 우선순위(전공·취업)는 고3의 지원 동기와 같은가, 다른가?",
+        "‘창의융합’ 지지는 자생적 수요인가, 제공된 담론의 수용인가?",
+        "융합 선호가 AI·SW대학에 쏠리는 것은 무엇을 뜻하는가?",
+        "우선순위가 낮다는 것은 ‘반대’인가, 아니면 ‘더 급한 게 있다’인가?"
+      ]
+    }
+  },
+  external: {
+    eyebrow: "수요 · 외부 자료",
+    hero: {
+      headline: "무전공 수요는 ‘상위권·완전 무전공’에 쏠려 있습니다.",
+      headlineSub:
+        "같은 무전공이라도 상위권은 폭등, 중하위권·지방대는 미달입니다. 한신 tier에 그대로 이전되지 않습니다. (외부 수치는 2차 인용 — 확인 필요)",
+      badges: [
+        { tone: "open", label: "정황", text: "상위권 자율전공은 폭등, 중하위권·지방대는 정원 미달 동반" },
+        { tone: "open", label: "확인 필요", text: "외부 수치는 언론·입시기관 2차 인용 — 1차 대조 전 잠정" }
+      ],
+      big: {
+        value: "tier 의존",
+        label: "무전공 효과의 방향",
+        compare: "상위권엔 자산, 중하위권엔 부채로 갈립니다"
+      }
+    },
+    signals: [
+      { tone: "caution", label: "정황", sub: "상위권 한정 수요" },
+      { tone: "caution", label: "동력", sub: "수요 아닌 정책" },
+      { tone: "open", label: "확인 필요", sub: "2차 인용" }
+    ],
+    story: {
+      kicker: "무엇을 모았나",
+      title: "한신 고3을 직접 묻기 전, 이미 나온 증거(책상 검증)",
+      body:
+        "한신 성적대 고3을 직접 조사하기 전, 이미 공개된 외부 증거를 한국·글로벌로 나누어 모았습니다. 모든 경쟁률·중도탈락 수치는 입시기관·언론 2차 인용이며, 모집요강·대학알리미 1차 대조 전까지 ‘확인 필요’입니다. 중도탈락·미달은 의대 증원 등 교란요인이 섞여 있어 ‘무전공이라서’로 단정하지 않고 상관·정황으로만 적습니다."
+    },
+    cards: {
+      kicker: "외부 증거가 가리키는 것",
+      title: "네 가지 정황",
+      items: [
+        {
+          title: "수요는 상위권·완전 무전공에 한정",
+          body:
+            "상위권 자율전공 경쟁률은 폭등했지만(예: 경희대 자율전공 111:1, 서울권 무전공 평균 22.18:1 — 2026 수시), 2025학년도 지방대 다수가 무전공에서 정원 미달을 겪었습니다(추가모집에도 지방 40곳 미달). 같은 제도가 tier에 따라 반대로 작동합니다(상관·정황). [리로스쿨·한국대학신문·매일신문]"
+        },
+        {
+          title: "도입 동력은 수요가 아니라 정책",
+          body:
+            "무전공 확대의 직접 계기는 2024년 1월 교육부 재정지원 정책(수도권·국립대 25% 권고 + 인센티브)입니다. 수험생 수요가 끌어서가 아니라 재정 인센티브가 밀어서 늘었다는 점은 ‘공급자 주도’ 의심과 정합합니다. [경향신문]"
+        },
+        {
+          title: "‘전공 미정 상태’ 자체의 선호는 약함",
+          body:
+            "무전공 입학생의 전공 선택은 적성·흥미보다 취업·재정지원·부모 조언 등 외부요인에 좌우되고, 전공 쏠림(운영대 73%가 상위 3개 학과에 정원 절반 집중)·중도탈락(일부 평균의 4배대)이 보고됩니다. 단 교란요인 미분리(상관). [한국일보(대교연)·경향신문·earticle]"
+        },
+        {
+          title: "처방은 ‘제도 유무’가 아니라 ‘실행 품질·선택폭’",
+          body:
+            "미국에서도 전공 탐색 수요는 보편적(입학생 43%가 탐색 계획)이나, 성과(잔존)는 기관의 지원 품질에 좌우됩니다. 한신 자체에서도 자유전공(선택폭 큼)은 인기, 계열 묶음(선택폭 작음)은 약세였습니다. [Encoura·SquareOne + 한신 자체 데이터]"
+        }
+      ]
+    },
+    sources: {
+      kicker: "근거 자료",
+      title: "주요 출처 (2차 인용 · 확인 필요)",
+      items: [
+        { name: "상위권 무전공 경쟁률 폭등", desc: "리로스쿨 입시매거진", href: "https://riroschool.kr/kceenews/detail/106" },
+        { name: "무전공 2년차 수요 유지(서울 22.18:1)", desc: "한국대학신문", href: "https://news.unn.net/news/articleView.html?idxno=584203" },
+        { name: "전공 쏠림 73% (대교연)", desc: "한국일보", href: "https://www.hankookilbo.com/News/Read/A2024032713300005182" },
+        { name: "무전공 중도탈락률 高", desc: "경향신문", href: "https://www.khan.co.kr/national/education/article/202402042126025" },
+        { name: "도입 동력 = 교육부 재정지원 정책", desc: "경향신문", href: "https://www.khan.co.kr/article/202405052058005" },
+        { name: "지방대 40곳 미달", desc: "매일신문", href: "https://www.imaeil.com/page/view/2025030315074193510" },
+        { name: "전공 탐색 수요(미국 43%)", desc: "Encoura", href: "https://www.encoura.org/resources/wake-up-call/how-prospective-student-mindsets-influence-major-and-college-choice/" },
+        { name: "원자료 — 외부검증 v1 전문", desc: "docs/입시결과분석/수험생수요_외부검증_v1.md" }
+      ]
+    },
+    questions: {
+      kicker: "공론 질문",
+      title: "외부 자료를 한신에 적용할 때 물을 것",
+      items: [
+        "상위권 무전공의 高경쟁률을 중하위권·계열 모집인 한신에 적용할 수 있는가?",
+        "도입 동력이 ‘수요’가 아니라 ‘정책’이라면, 한신의 선택 기준은 무엇이어야 하는가?",
+        "중도탈락·쏠림의 교란요인(의대 증원 등)을 어떻게 분리해 한신에 읽을 것인가?",
+        "외부 2차 수치를 모집요강·대학알리미 1차 자료로 언제 검증할 것인가?"
+      ]
+    }
+  },
+  survey: {
+    eyebrow: "수요 · 수요조사안",
+    hero: {
+      headline: "그래서, 고3에게 직접 묻습니다.",
+      headlineSub:
+        "재학생·외부 자료로는 못 메우는 ‘한신 지원층 고3의 직접 수요’를 선택실험(Conjoint)으로 측정하는 설계입니다. 아직 실사 전, 발주용 실행안입니다.",
+      badges: [
+        { tone: "open", label: "설계", text: "아직 실사 전 — 발주에 쓰는 실행안" },
+        { tone: "fact", label: "목표", text: "학과 vs 계열 vs 무전공, 무엇이 지원의향을 높이나 직접 측정" }
+      ],
+      big: {
+        value: "n ≥ 400",
+        label: "본조사 권장 표본(한신 지원가능층)",
+        compare: "성적밴드로 ‘한신 tier’를 필터링하는 것이 핵심 전제"
+      }
+    },
+    signals: [
+      { tone: "open", label: "설계", sub: "실사 전" },
+      { tone: "strong", label: "핵심", sub: "자율성↔지원 부호" },
+      { tone: "caution", label: "전제", sub: "성적밴드 정합" }
+    ],
+    story: {
+      kicker: "왜 필요한가",
+      title: "재학생도 외부 자료도 못 메운 공백",
+      body:
+        "재학생 조사도, 외부 자료도 ‘한신에 지원하는 고3’을 직접 묻지는 못했습니다. 이 공백을 메우는 것이 선택실험(Conjoint)입니다. 응답자에게 여러 전공·모집방식 조합을 제시하고 ‘어디에 지원하겠는가’를 반복 선택하게 해, 무엇이 지원의향을 좌우하는지를 통계로 분해합니다."
+    },
+    cards: {
+      kicker: "실행안의 골격",
+      title: "무엇을·누구에게·어떻게·그다음",
+      items: [
+        {
+          title: "무엇을 재나 — 모집방식의 효과",
+          body:
+            "학과 모집 vs 계열 모집 vs 완전 무전공 중 무엇이 지원의향을 높이는지, 그리고 ‘자율성을 키우면 지원이 느는가 주는가’의 부호를 직접 측정합니다. 계열제 평가의 핵심 미검증 명제입니다."
+        },
+        {
+          title: "누구에게 묻나 — 한신 지원가능층",
+          body:
+            "경기남부 고3·N수생과 학부모, n≥400(하위집단 분석 시 500 권장). 성적밴드 스크리너로 한신 지원가능 성적대를 필터링해, 상·하위권 혼입(tier 교란)을 막습니다. 합격선 밴드는 입학처 자료로만 확정 가능합니다."
+        },
+        {
+          title: "어떻게 분석하나 — 점유율 시뮬레이터",
+          body:
+            "위계적 베이즈(HB)로 속성별 효용을 추정하고, ‘학과모집 vs 계열모집 지원의향 점유율 차이 몇 %p’ 같은 질문에 답하는 시뮬레이터를 만듭니다."
+        },
+        {
+          title: "결과를 어떻게 쓰나 — 결정 규칙",
+          body:
+            "예: ‘자율성 부호가 음(−)이고 학과모집 점유율이 계열모집보다 일정 %p 높으면 → 전면 계열제를 증분형으로 조정’처럼, 결과값을 사전 결정 규칙으로 연결합니다(임계값 사전등록 권장)."
+        },
+        {
+          title: "한계 — 이것은 ‘말한 선호’다",
+          body:
+            "Conjoint는 가상선택(stated preference)입니다. 실제 지원과 다를 수 있어, 자유전공 실제 경쟁률 등 입시 데이터와 교차검증해야 하며, 이 조사 단독으로 ‘계열제가 경쟁률을 낮춘다’는 인과를 단정하지 않습니다."
+        }
+      ]
+    },
+    sources: {
+      kicker: "근거 자료",
+      title: "설계 문서",
+      items: [
+        { name: "수요조사 Conjoint 실행안 v1", desc: "발주용 실행안 — 문항·표본·일정·결정규칙 (docs/입시결과분석/수요조사_Conjoint_실행안_v1.md)" },
+        { name: "수요조사 Conjoint 설계안(원안)", desc: "개념 설계 (docs/입시결과분석/수요조사_Conjoint_설계안.md)" }
+      ]
+    },
+    questions: {
+      kicker: "공론 질문",
+      title: "실사 전에 먼저 정할 것",
+      items: [
+        "한신 합격선 성적밴드를 어떻게 확정할 것인가(입학처 자료 선결)?",
+        "조사 결과 어떤 임계값에서 어떤 결정을 내릴지 사전 등록할 것인가?",
+        "가상선택과 실제 지원의 괴리를 어떤 입시 데이터로 교차검증할 것인가?",
+        "미성년 포함 조사의 보호자 동의·개인정보 절차(IRB·PIPA)는 어떻게 갖출 것인가?"
+      ]
+    }
+  }
+};
+
 export const evidenceCards = [
   {
     label: "강건한 추정",
@@ -341,7 +627,7 @@ export const menuSummary: Record<
     bottomLine:
       "전공 쏠림은 이미 실재합니다. 자율성을 더 넓힌다면 '상한 수치'가 아니라 동반 '장치(메커니즘)'가 취약 전공 보호와 자율성을 동시에 좌우합니다.",
     plain:
-      "지금도 학생들이 일부 인기 전공으로 몰립니다. 선택 폭을 더 넓히면 쏠림은 더 커지지만, 넛지·학과보호 같은 장치를 함께 두면 인기·비인기 전공을 둘 다 지키면서 자율성도 유지할 수 있습니다.",
+      "지금도 학생들이 일부 인기 전공으로 몰립니다. 선택 폭을 더 넓히면 쏠림은 더 커지므로, 200%를 쓰려면 취약전공 하한·상위전공 단계개방·조기경보를 함께 두어 전공소외와 자율성 비용을 같이 관리해야 합니다.",
     signals: [
       { tone: "strong", label: "확정", sub: "편중은 실재" },
       { tone: "strong", label: "설계로 해결", sub: "장치가 관건" },
@@ -763,12 +1049,12 @@ export const evaluationPage = {
 };
 
 // ── 전공운영 재설계 전용 재구성 (비전공자용). ImprovementDetail.tsx가 사용. ──
-// 어려운 용어(넛지·HHI·취약단위·학과보호)를 페이지 안에서 풀어 설명.
+// 어려운 용어(넛지·HHI·취약단위·하한보장)를 페이지 안에서 풀어 설명.
 export const improvementPage = {
   eyebrow: "설계 · 전공운영 재설계",
   hero: {
     headline: "전공운영 재설계는 네 축입니다.",
-    headlineSub: "① 쏠림을 막는 ‘설계’, ② 전면 계열제를 ‘증분형’으로, ③ 잦은 입시전형·제도 변경 멈추기, ④ 다전공 의무화의 학습부담 점검 — 모두 폐지가 아니라 보완입니다. 무전공은 여전히 정부 정책이자 전국 표준이기 때문입니다.",
+    headlineSub: "전면 계열제를 증분형으로 다듬기, 전형제도 안정화, 쏠림을 막는 설계, 다전공 의무화의 학습부담 점검 — 모두 폐지가 아니라 보완입니다. 무전공은 여전히 정부 정책이자 전국 표준이기 때문입니다.",
     badges: [
       { tone: "fact" as const, label: "확정", text: "전공 쏠림은 지금도 이미 일어나고 있습니다" },
       { tone: "fact" as const, label: "정책", text: "무전공은 여전히 교육부 정책 — 폐지가 아니라 보완이 현실적입니다" },
@@ -781,10 +1067,10 @@ export const improvementPage = {
     }
   },
   pillarNav: [
-    { id: "pillar-incremental", label: "② 전면 → 증분형 보조 맞추기" },
-    { id: "pillar-stability", label: "③ 잦은 전형·제도 변경 멈추기" },
-    { id: "pillar-balance", label: "① 쏠림을 막는 설계" },
-    { id: "pillar-multimajor", label: "④ 다전공 의무화" }
+    { id: "pillar-incremental", label: "전면 계열제를 증분형으로" },
+    { id: "pillar-stability", label: "전형제도 안정화" },
+    { id: "pillar-balance", label: "쏠림을 막는 설계" },
+    { id: "pillar-multimajor", label: "다전공 의무화" }
   ],
   signals: [
     { tone: "strong" as const, label: "확정", sub: "쏠림은 이미 실재" },
@@ -829,15 +1115,15 @@ export const improvementPage = {
       },
       {
         title: "③ 그래서 200% 설계안은 이렇게 짜야 합니다",
-        head: ["장치", "설계 내용", "왜 필요한가"],
+        head: ["장치", "설계 내용", "직접 근거", "아직 가정"],
         rows: [
-          ["취약전공 하한", "수요 하위 전공에 정원 70% 안팎의 최소좌석 보장", "전공소외를 직접 차단"],
-          ["상위전공 단계개방", "인기 상위 전공은 170%까지 우선 개방, 남는 여석 있을 때 200%까지 개방", "과밀을 늦추고 여석을 보호전공에 배분"],
-          ["미달우선 스필오버", "상한 초과 학생은 미달 전공·연계트랙 여석부터 안내", "강제 이전보다 낮은 마찰로 공동화 완화"],
-          ["조기경보", "취약전공 <70% 또는 <50% 전공 발생 시 다음 학기 규칙 재조정", "한 번 정한 200%가 자동 방치되지 않게 함"]
+          ["취약전공 하한", "수요 하위 전공에 정원 70% 안팎의 최소좌석 보장", "D3·D5에서 취약6 <70% 전공이 0개", "70%와 취약6 기준은 숙의 필요"],
+          ["상위전공 단계개방", "인기 상위 전공은 170% 우선 개방, 남는 여석 있을 때 200%", "D5가 HHI 492, <50% 전공 0.2개로 가장 낮음", "170%와 상위5 기준은 원자료 재검증 필요"],
+          ["미달우선 스필오버", "상한 초과 학생은 미달 전공·연계트랙 여석부터 안내", "D1에서 HHI가 655→570으로 하락", "학생 수용성과 2지망 만족도는 미검증"],
+          ["조기경보", "취약전공 <70% 또는 <50% 전공 발생 시 다음 학기 규칙 재조정", "D0에서 <50% 전공 7.5개, 취약6 충원 27%", "경보 후 조정 권한·절차는 별도 설계 필요"]
         ],
         highlight: 0,
-        note: "정리하면 200%는 ‘최대 허용치’로 두되, 실제 운영은 하한보장·단계개방·조기경보가 붙은 조건부 200%여야 합니다."
+        note: "정리하면 200%는 ‘최대 허용치’로 둘 수 있지만, 이 표의 수치는 2026 판독치 기반 예시입니다. 근거가 있는 것은 방향과 위험 크기이고, 70%·170% 같은 임계값은 원자료로 다시 검증해야 합니다."
       }
     ],
     howModeled: {
@@ -858,7 +1144,8 @@ export const improvementPage = {
       { term: "상한 150% · 200%", desc: "한 전공이 정원의 몇 배까지 학생을 받을 수 있나. 200%면 인기 전공이 정원의 2배까지 흡수 → 쏠림 여지가 큽니다." },
       { term: "쏠림 정도 (HHI)", desc: "학생이 몇몇 전공에 얼마나 몰렸는지를 한 숫자로 나타낸 것. 높을수록 쏠림이 심합니다." },
       { term: "넛지 (안내 장치)", desc: "강제하지 않고 정보·기본값·안내를 설계해 더 나은 선택을 ‘유도’하는 것. 이 시뮬에선 ‘넘친 학생을 정원 미달 전공 먼저 배정’하는 규칙으로 구현했습니다." },
-      { term: "학과보호", desc: "텅 빌 위험이 있는 전공에 최소 정원을 보장해, 개방경쟁에서 완전히 밀려나지 않게 하는 장치. 이 시뮬에선 수요 하위 4개 전공을 별도 학과모집으로 보장했습니다." }
+      { term: "취약전공 하한", desc: "수요가 낮아 공동화될 위험이 큰 전공에 최소 충원 기준을 두는 장치입니다. 이번 예시에서는 수요 하위 6개 전공에 정원 70% 안팎의 하한을 둔 경우를 비교했습니다." },
+      { term: "상위전공 단계개방", desc: "인기 상위 전공을 처음부터 200%까지 열지 않고, 보호 하한이 충족된 뒤 남는 여석이 있을 때 200%까지 여는 장치입니다." }
     ]
   },
   cards: {
@@ -885,7 +1172,7 @@ export const improvementPage = {
   incremental: {
     id: "pillar-incremental",
     kicker: "두 번째 보완 축",
-    title: "② 전면 계열제를 ‘증분형’으로 — 폐지가 아니라 보조 맞추기",
+    title: "전면 계열제를 ‘증분형’으로 — 폐지가 아니라 보조 맞추기",
     lead:
       "무전공·계열 모집은 되돌릴 대상이 아닙니다. ① 여전히 교육부 정책이고(2024년 발표, 2025학년도부터 수도권·국립대 25% 권고와 재정 인센티브), ② 우리가 비교에 쓴 대학들도 대부분 이미 무전공을 도입했습니다. 그래서 방향은 ‘폐지(철회)’가 아니라 ‘전면을 증분형으로 다듬어 다른 대학과 보조를 맞추는 것’입니다. 이는 쏠림 설계(①)와 더불어 보완의 또 다른 축입니다.",
     points: [
@@ -927,7 +1214,7 @@ export const improvementPage = {
   stability: {
     id: "pillar-stability",
     kicker: "세 번째 보완 축",
-    title: "③ 잦은 입시전형·제도 변경 멈추기",
+    title: "전형제도 안정화 — 잦은 입시전형·제도 변경 멈추기",
     lead:
       "한신은 적성고사 폐지 뒤 거의 매년 입시전형과 제도를 바꿨습니다. 수험생과 교사는 ‘작년 기준이 올해 또 바뀐다’는 불확실성에 노출됩니다. 예측가능성이 떨어지면 지원 자체가 위축될 수 있습니다 — 예측가능성은 모집의 자산입니다.",
     table: {
@@ -955,7 +1242,7 @@ export const improvementPage = {
   multiMajor: {
     id: "pillar-multimajor",
     kicker: "네 번째 보완 축",
-    title: "④ 다전공 의무화 — 융합교육과 학습부담을 분리하기",
+    title: "다전공 의무화 — 융합교육과 학습부담을 분리하기",
     lead:
       "사회가 요구하는 인재가 융합형이라는 방향은 맞습니다. 그러나 그것이 곧 ‘복수전공 의무’를 입시 홍보 전면에 세워야 한다는 뜻은 아닙니다. 한신 지원 가능층에는 ‘융합’보다 ‘공부가 더 늘어난다’, ‘단일 전공도 벅찬데 졸업이 어려워진다’는 신호로 읽힐 수 있습니다. 현재 자료로 한신 학생의 학습근력은 직접 판정할 수 없으므로, 이 축은 단정이 아니라 검증 과제입니다.",
     points: [

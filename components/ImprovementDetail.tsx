@@ -4,7 +4,7 @@ import { gapsByMenu, improvementPage as I, menuBlockLabels, type ImprovementSubK
 const titleByKey: Record<ImprovementSubKey, string> = {
   incremental: I.incremental.title,
   stability: I.stability.title,
-  balance: "① 쏠림을 막는 설계",
+  balance: "쏠림을 막는 설계",
   multimajor: I.multiMajor.title
 };
 

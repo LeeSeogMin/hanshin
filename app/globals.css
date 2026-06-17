@@ -2180,3 +2180,12 @@ h2 {
 .future-avoid-list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }
 .future-avoid-list li { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 12px; align-items: start; padding: 14px 16px; border: 1px solid #e7c7c0; border-radius: 8px; background: var(--rose-soft); color: #7a2e26; font-size: 15px; line-height: 1.6; }
 .future-avoid-list svg { color: #c0392b; margin-top: 3px; flex-shrink: 0; }
+
+/* 수요조사 — 근거 자료 목록 */
+.demand-sources { margin-top: 36px; }
+.demand-source-list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }
+.demand-source-list li { display: grid; gap: 3px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.demand-source-list li a { display: inline-flex; align-items: center; gap: 7px; color: var(--teal-dark); text-decoration: none; font-weight: 600; }
+.demand-source-list li a:hover { text-decoration: underline; }
+.demand-source-list li svg { flex-shrink: 0; }
+.demand-source-list li small { color: var(--muted, #6b7280); font-size: 13px; line-height: 1.5; }
