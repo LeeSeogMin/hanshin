@@ -3,12 +3,12 @@ import { ImprovementDetail } from "@/components/ImprovementDetail";
 import { ImprovementSubnav } from "@/components/ImprovementSubnav";
 import { SiteHeader } from "@/components/SiteHeader";
 
-export default function ImprovementPage() {
+export default function ImprovementStabilityPage() {
   return (
     <main>
       <SiteHeader activeKey="improvement" />
-      <ImprovementSubnav activeKey="incremental" />
-      <ImprovementDetail activeKey="incremental" />
+      <ImprovementSubnav activeKey="stability" />
+      <ImprovementDetail activeKey="stability" />
       <ProcessSection />
       <DiscussionSection />
       <SiteFooter />

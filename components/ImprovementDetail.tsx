@@ -1,184 +1,53 @@
 import { BookOpen, TriangleAlert } from "lucide-react";
-import { gapsByMenu, improvementPage as I, menuBlockLabels } from "@/lib/content";
+import { gapsByMenu, improvementPage as I, menuBlockLabels, type ImprovementSubKey } from "@/lib/content";
 
-export function ImprovementDetail() {
+const titleByKey: Record<ImprovementSubKey, string> = {
+  incremental: I.incremental.title,
+  stability: I.stability.title,
+  balance: "① 쏠림을 막는 설계",
+  multimajor: I.multiMajor.title
+};
+
+type ImprovementDetailProps = {
+  activeKey: ImprovementSubKey;
+};
+
+export function ImprovementDetail({ activeKey }: ImprovementDetailProps) {
   const gaps = gapsByMenu.improvement;
   const blockLabels = menuBlockLabels.improvement;
 
   return (
     <section className="detail-section eval-page" aria-labelledby="improvement-title">
-      {/* 1. 히어로 */}
+      {/* 히어로 (축별) */}
       <header className="eval-hero">
         <span className="kicker">{I.eyebrow}</span>
         <h1 id="improvement-title" className="eval-hero-h1">
-          {I.hero.headline}
+          {titleByKey[activeKey]}
         </h1>
         <p className="eval-hero-sub">{I.hero.headlineSub}</p>
-        <div className="eval-hero-badges">
-          {I.hero.badges.map((b) => (
-            <span className={`eval-badge ${b.tone}`} key={b.label}>
-              <strong>{b.label}</strong>
-              {b.text}
-            </span>
-          ))}
-        </div>
-        <div className="eval-hero-figure">
-          <div className="eval-hero-big">
-            <strong>{I.hero.big.value}</strong>
-            <span>{I.hero.big.label}</span>
-            <small>{I.hero.big.compare}</small>
-          </div>
-        </div>
       </header>
 
-      {/* 2. 신호등 */}
-      <div className="eval-signals">
-        {I.signals.map((s) => (
-          <span className={`bluf-signal ${s.tone}`} key={s.label}>
-            <strong>{s.label}</strong>
-            <small>{s.sub}</small>
-          </span>
-        ))}
-      </div>
-
-      {/* 2-1. 보완 축 하위 메뉴 */}
-      <nav className="pillar-nav" aria-label="전공운영 재설계 축 하위 메뉴">
-        {I.pillarNav.map((p) => (
-          <a className="pillar-nav-pill" href={`#${p.id}`} key={p.id}>
-            {p.label}
-          </a>
-        ))}
-      </nav>
-
       {/* === 축 ② 전면 → 증분형 보조 맞추기 === */}
-      <h2 className="pillar-header" id={I.incremental.id}>
-        축 {I.incremental.title}
-      </h2>
-      <section className="eval-story">
-        <span className="kicker">{I.incremental.kicker}</span>
-        <p className="eval-lead">{I.incremental.lead}</p>
-        <div className="eval-hero-badges pillar-points">
-          {I.incremental.points.map((p) => (
-            <span className={`eval-badge ${p.tone}`} key={p.label}>
-              <strong>{p.label}</strong>
-              {p.text}
-            </span>
-          ))}
-        </div>
-        <article className="eval-support-card pillar-framing">
-          <h4>{I.incremental.framing.title}</h4>
-          <p>{I.incremental.framing.body}</p>
-        </article>
-        <div className="eval-howmodeled">
-          <h4>{I.incremental.how.title}</h4>
-          <dl className="eval-glossary-list">
-            {I.incremental.how.items.map((it) => (
-              <div className="eval-glossary-item" key={it.term}>
-                <dt>{it.term}</dt>
-                <dd>{it.desc}</dd>
-              </div>
+      {activeKey === "incremental" ? (
+        <section className="eval-story">
+          <span className="kicker">{I.incremental.kicker}</span>
+          <p className="eval-lead">{I.incremental.lead}</p>
+          <div className="eval-hero-badges pillar-points">
+            {I.incremental.points.map((p) => (
+              <span className={`eval-badge ${p.tone}`} key={p.label}>
+                <strong>{p.label}</strong>
+                {p.text}
+              </span>
             ))}
-          </dl>
-        </div>
-      </section>
-
-      {/* === 축 ③ 잦은 전형·제도 변경 멈추기 === */}
-      <h2 className="pillar-header" id={I.stability.id}>
-        축 {I.stability.title}
-      </h2>
-      <section className="eval-story">
-        <span className="kicker">{I.stability.kicker}</span>
-        <p className="eval-lead">{I.stability.lead}</p>
-        <article className="sim-card pillar-table">
-          <h4>{I.stability.table.title}</h4>
-          <div className="sim-table-wrap">
-            <table className="sim-table">
-              <thead>
-                <tr>
-                  {I.stability.table.head.map((h) => (
-                    <th key={h}>{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {I.stability.table.rows.map((row) => (
-                  <tr key={row[0]}>
-                    {row.map((cell, ci) => (
-                      <td key={ci} className={ci === 0 ? "row-label" : undefined}>
-                        {cell}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
-          <p className="sim-interpretation">{I.stability.table.caption}</p>
-        </article>
-        <div className="eval-support-grid pillar-stance-grid">
-          <article className="eval-support-card">
-            <h4>{I.stability.contrast.title}</h4>
-            <p>{I.stability.contrast.body}</p>
+          <article className="eval-support-card pillar-framing">
+            <h4>{I.incremental.framing.title}</h4>
+            <p>{I.incremental.framing.body}</p>
           </article>
-          <article className="eval-support-card pillar-stance">
-            <h4>{I.stability.stance.title}</h4>
-            <p>{I.stability.stance.body}</p>
-          </article>
-        </div>
-      </section>
-
-      {/* === 축 ① 쏠림을 막는 설계 === */}
-      <h2 className="pillar-header" id="pillar-balance">
-        축 ① 쏠림을 막는 설계
-      </h2>
-
-      {/* 3. 지금 무슨 일이 */}
-      <section className="eval-story">
-        <span className="kicker">{I.intro.kicker}</span>
-        <h2>{I.intro.title}</h2>
-        <p className="eval-lead">{I.intro.body}</p>
-      </section>
-
-      {/* 4. 시뮬레이션 (쉬운 표) */}
-      <section className="eval-story">
-        <span className="kicker">{I.sims.kicker}</span>
-        <h2>{I.sims.title}</h2>
-        <p className="eval-lead">{I.sims.lead}</p>
-        <div className="sim-grid">
-          {I.sims.tables.map((t) => (
-            <article className="sim-card" key={t.title}>
-              <h4>{t.title}</h4>
-              <div className="sim-table-wrap">
-                <table className="sim-table">
-                  <thead>
-                    <tr>
-                      {t.head.map((h) => (
-                        <th key={h}>{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {t.rows.map((row, ri) => (
-                      <tr key={row[0]} className={t.highlight === ri ? "row-best" : undefined}>
-                        {row.map((cell, ci) => (
-                          <td key={ci} className={ci === 0 ? "row-label" : undefined}>
-                            {cell}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <p className="sim-interpretation">{t.note}</p>
-            </article>
-          ))}
-        </div>
-        {I.sims.howModeled ? (
           <div className="eval-howmodeled">
-            <h4>{I.sims.howModeled.title}</h4>
+            <h4>{I.incremental.how.title}</h4>
             <dl className="eval-glossary-list">
-              {I.sims.howModeled.items.map((it) => (
+              {I.incremental.how.items.map((it) => (
                 <div className="eval-glossary-item" key={it.term}>
                   <dt>{it.term}</dt>
                   <dd>{it.desc}</dd>
@@ -186,97 +55,202 @@ export function ImprovementDetail() {
               ))}
             </dl>
           </div>
-        ) : null}
-        <p className="eval-figure-note">{I.sims.caveat}</p>
-      </section>
+        </section>
+      ) : null}
 
-      {/* 5. 용어 풀이 */}
-      <section className="eval-glossary">
-        <span className="kicker">
-          <BookOpen aria-hidden="true" size={15} />
-          {I.glossary.kicker}
-        </span>
-        <h2>{I.glossary.title}</h2>
-        <dl className="eval-glossary-list">
-          {I.glossary.items.map((g) => (
-            <div className="eval-glossary-item" key={g.term}>
-              <dt>{g.term}</dt>
-              <dd>{g.desc}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-
-      {/* 6. 핵심 카드 */}
-      <section className="eval-story">
-        <span className="kicker">{I.cards.kicker}</span>
-        <h2>{I.cards.title}</h2>
-        <div className="eval-support-grid">
-          {I.cards.items.map((card) => (
-            <article className="eval-support-card" key={card.title}>
-              <h4>{card.title}</h4>
-              <p>{card.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* === 축 ④ 다전공 의무화 === */}
-      <h2 className="pillar-header" id={I.multiMajor.id}>
-        축 {I.multiMajor.title}
-      </h2>
-      <section className="eval-story">
-        <span className="kicker">{I.multiMajor.kicker}</span>
-        <p className="eval-lead">{I.multiMajor.lead}</p>
-        <div className="eval-hero-badges pillar-points">
-          {I.multiMajor.points.map((p) => (
-            <span className={`eval-badge ${p.tone}`} key={p.label}>
-              <strong>{p.label}</strong>
-              {p.text}
-            </span>
-          ))}
-        </div>
-        <div className="eval-support-grid pillar-stance-grid">
-          {I.multiMajor.cards.map((card) => (
-            <article className="eval-support-card" key={card.title}>
-              <h4>{card.title}</h4>
-              <p>{card.body}</p>
-            </article>
-          ))}
-        </div>
-        <article className="sim-card pillar-table">
-          <h4>{I.multiMajor.table.title}</h4>
-          <div className="sim-table-wrap">
-            <table className="sim-table">
-              <thead>
-                <tr>
-                  {I.multiMajor.table.head.map((h) => (
-                    <th key={h}>{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {I.multiMajor.table.rows.map((row) => (
-                  <tr key={row[0]}>
-                    {row.map((cell, ci) => (
-                      <td key={ci} className={ci === 0 ? "row-label" : undefined}>
-                        {cell}
-                      </td>
+      {/* === 축 ③ 잦은 전형·제도 변경 멈추기 === */}
+      {activeKey === "stability" ? (
+        <section className="eval-story">
+          <span className="kicker">{I.stability.kicker}</span>
+          <p className="eval-lead">{I.stability.lead}</p>
+          <article className="sim-card pillar-table">
+            <h4>{I.stability.table.title}</h4>
+            <div className="sim-table-wrap">
+              <table className="sim-table">
+                <thead>
+                  <tr>
+                    {I.stability.table.head.map((h) => (
+                      <th key={h}>{h}</th>
                     ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {I.stability.table.rows.map((row) => (
+                    <tr key={row[0]}>
+                      {row.map((cell, ci) => (
+                        <td key={ci} className={ci === 0 ? "row-label" : undefined}>
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="sim-interpretation">{I.stability.table.caption}</p>
+          </article>
+          <div className="eval-support-grid pillar-stance-grid">
+            <article className="eval-support-card">
+              <h4>{I.stability.contrast.title}</h4>
+              <p>{I.stability.contrast.body}</p>
+            </article>
+            <article className="eval-support-card pillar-stance">
+              <h4>{I.stability.stance.title}</h4>
+              <p>{I.stability.stance.body}</p>
+            </article>
           </div>
-          <p className="sim-interpretation">{I.multiMajor.table.caption}</p>
-        </article>
-        <article className="eval-support-card pillar-stance">
-          <h4>{I.multiMajor.stance.title}</h4>
-          <p>{I.multiMajor.stance.body}</p>
-        </article>
-      </section>
+        </section>
+      ) : null}
 
-      {/* 7. 공론 질문 */}
+      {/* === 축 ① 쏠림을 막는 설계 === */}
+      {activeKey === "balance" ? (
+        <>
+          {/* 지금 무슨 일이 */}
+          <section className="eval-story">
+            <span className="kicker">{I.intro.kicker}</span>
+            <h2>{I.intro.title}</h2>
+            <p className="eval-lead">{I.intro.body}</p>
+          </section>
+
+          {/* 시뮬레이션 (쉬운 표) */}
+          <section className="eval-story">
+            <span className="kicker">{I.sims.kicker}</span>
+            <h2>{I.sims.title}</h2>
+            <p className="eval-lead">{I.sims.lead}</p>
+            <div className="sim-grid">
+              {I.sims.tables.map((t) => (
+                <article className="sim-card" key={t.title}>
+                  <h4>{t.title}</h4>
+                  <div className="sim-table-wrap">
+                    <table className="sim-table">
+                      <thead>
+                        <tr>
+                          {t.head.map((h) => (
+                            <th key={h}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {t.rows.map((row, ri) => (
+                          <tr key={row[0]} className={t.highlight === ri ? "row-best" : undefined}>
+                            {row.map((cell, ci) => (
+                              <td key={ci} className={ci === 0 ? "row-label" : undefined}>
+                                {cell}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="sim-interpretation">{t.note}</p>
+                </article>
+              ))}
+            </div>
+            {I.sims.howModeled ? (
+              <div className="eval-howmodeled">
+                <h4>{I.sims.howModeled.title}</h4>
+                <dl className="eval-glossary-list">
+                  {I.sims.howModeled.items.map((it) => (
+                    <div className="eval-glossary-item" key={it.term}>
+                      <dt>{it.term}</dt>
+                      <dd>{it.desc}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            ) : null}
+            <p className="eval-figure-note">{I.sims.caveat}</p>
+          </section>
+
+          {/* 용어 풀이 */}
+          <section className="eval-glossary">
+            <span className="kicker">
+              <BookOpen aria-hidden="true" size={15} />
+              {I.glossary.kicker}
+            </span>
+            <h2>{I.glossary.title}</h2>
+            <dl className="eval-glossary-list">
+              {I.glossary.items.map((g) => (
+                <div className="eval-glossary-item" key={g.term}>
+                  <dt>{g.term}</dt>
+                  <dd>{g.desc}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+
+          {/* 핵심 카드 */}
+          <section className="eval-story">
+            <span className="kicker">{I.cards.kicker}</span>
+            <h2>{I.cards.title}</h2>
+            <div className="eval-support-grid">
+              {I.cards.items.map((card) => (
+                <article className="eval-support-card" key={card.title}>
+                  <h4>{card.title}</h4>
+                  <p>{card.body}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        </>
+      ) : null}
+
+      {/* === 축 ④ 다전공 의무화 === */}
+      {activeKey === "multimajor" ? (
+        <section className="eval-story">
+          <span className="kicker">{I.multiMajor.kicker}</span>
+          <p className="eval-lead">{I.multiMajor.lead}</p>
+          <div className="eval-hero-badges pillar-points">
+            {I.multiMajor.points.map((p) => (
+              <span className={`eval-badge ${p.tone}`} key={p.label}>
+                <strong>{p.label}</strong>
+                {p.text}
+              </span>
+            ))}
+          </div>
+          <div className="eval-support-grid pillar-stance-grid">
+            {I.multiMajor.cards.map((card) => (
+              <article className="eval-support-card" key={card.title}>
+                <h4>{card.title}</h4>
+                <p>{card.body}</p>
+              </article>
+            ))}
+          </div>
+          <article className="sim-card pillar-table">
+            <h4>{I.multiMajor.table.title}</h4>
+            <div className="sim-table-wrap">
+              <table className="sim-table">
+                <thead>
+                  <tr>
+                    {I.multiMajor.table.head.map((h) => (
+                      <th key={h}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {I.multiMajor.table.rows.map((row) => (
+                    <tr key={row[0]}>
+                      {row.map((cell, ci) => (
+                        <td key={ci} className={ci === 0 ? "row-label" : undefined}>
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="sim-interpretation">{I.multiMajor.table.caption}</p>
+          </article>
+          <article className="eval-support-card pillar-stance">
+            <h4>{I.multiMajor.stance.title}</h4>
+            <p>{I.multiMajor.stance.body}</p>
+          </article>
+        </section>
+      ) : null}
+
+      {/* 공론 질문 (공통) */}
       <div className="question-panel">
         <div>
           <span className="kicker">{I.questions.kicker}</span>
@@ -289,7 +263,7 @@ export function ImprovementDetail() {
         </ul>
       </div>
 
-      {/* 8. 데이터 공백 (접기) */}
+      {/* 데이터 공백 (접기, 공통) */}
       <details className="fold-block">
         <summary className="fold-summary">
           <span className="kicker gap-kicker">
