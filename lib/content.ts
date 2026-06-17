@@ -31,16 +31,6 @@ export const menuItems = [
     icon: BarChart3
   },
   {
-    key: "cases" as const,
-    href: "/cases",
-    label: "과거사례",
-    eyebrow: "선례",
-    title: "과거 자유전공 실패를 공부하지 않은 채 반복하고 있는가",
-    description:
-      "15년 전 자유전공학부의 도입·폐지 사례를 정리하고, 한신 계열제 전면도입이 반면교사를 놓쳤는지 점검합니다.",
-    icon: History
-  },
-  {
     key: "improvement" as const,
     href: "/improvement",
     label: "계열제 보완",
@@ -72,12 +62,31 @@ export const menuItems = [
   }
 ];
 
+export type EvaluationSubKey = "effect" | "cases";
+
+export const evaluationSubItems = [
+  {
+    key: "effect" as const,
+    href: "/evaluation",
+    label: "계열제효과평가",
+    description: "현재 계열제 평가 내용을 봅니다.",
+    icon: BarChart3
+  },
+  {
+    key: "cases" as const,
+    href: "/evaluation/cases",
+    label: "과거사례",
+    description: "자유전공·계열 모집의 과거 선례를 봅니다.",
+    icon: History
+  }
+];
+
 // ── AI 시대 미래전략 전용 (비전공자용). FutureDetail.tsx가 사용. ──
 export const futurePage = {
   eyebrow: "전략 · AI 시대 미래전략",
   hero: {
-    headline: "AI 시대의 답은 ‘AI·SW만 키우기’도, ‘전공 줄이기’도 아닙니다.",
-    headlineSub: "AI 활용역량과 전공역량을 함께 — 한신의 두 강점(인문사회대 · AI·SW대)을 ‘깊게’ 융합하는 것입니다.",
+    headline: "해법은 깊은 융합입니다.",
+    headlineSub: "AI 시대에는 AI·SW만 키우기도, 전공 줄이기도 아니라 AI 활용역량과 전공역량을 함께 키워야 합니다.",
     badges: [
       { tone: "fact" as const, label: "확정", text: "AI·SW 일변도는 답이 아닙니다 (AI 전공 경쟁률도 하락 중)" },
       { tone: "open" as const, label: "방향", text: "인문사회 × AI·SW 융합 — 단, 이름만 융합은 실패합니다" }
@@ -176,7 +185,7 @@ export const futurePage = {
 export const casesPage = {
   eyebrow: "선례 · 과거사례",
   hero: {
-    headline: "과거에 실패한 제도를, 그 실패를 공부하지 않은 채 되풀이하고 있는가?",
+    headline: "과거 실패를 반복합니까?",
     headlineSub: "여러 대학이 ‘자유전공학부’를 만들었다 접었습니다. 한신은 그 실패 조건을 피하도록 설계했을까요?",
     badges: [
       { tone: "fact" as const, label: "확정", text: "중앙대·연세대·외대 등 다수 대학이 자유전공을 폐지·축소했습니다" },
@@ -339,6 +348,12 @@ export const sections = {
           "SDID -1.60, DID -2.78, 독립 가분석 -2.1~-3.0이 같은 방향을 가리킵니다. 1차 원자료 직접 재현에서도 방향이 일치합니다(clean 비교군 -1.54). 다만 가짜 처치연도를 2022(계열제 1년 전)로 두면 효과의 약 86%(-1.73)가 이미 나타납니다. 그 2022 선행급락의 1순위 원인은 적성고사 폐지(2022학년도 전국 폐지·계열제 무관)로 외부 검증됐습니다. 같은 적성 동질군(평택 등)이 2023~2025 회복하는 동안 한신은 추가 하락한 구간이 계열제 후보로 남으나, 이는 미분해(상관 관찰)입니다. 공간 플라시보 p=0.10 경계·신뢰구간도 넓어 '확정'·정밀한 크기 단정은 유보합니다."
       },
       {
+        icon: GitBranch,
+        title: "한신은 ‘전면’, 비교 대학은 ‘증분’ (2026 보강)",
+        body:
+          "무전공은 이제 전국 표준입니다. 비교에 쓴 대학들도 2025년쯤엔 거의 다 무전공을 도입했지만, 대부분은 학과를 그대로 두고 일부만 무전공으로 더한 ‘증분형’이고 한신만 학과를 없앤 ‘전면 전환’입니다. 예를 들어 평택은 증분형으로 회복했고 한신은 전면 전환 뒤 돌아오지 못했습니다(반도체 학과·입지는 두 대학이 비슷해 차이가 아닙니다). 그래서 핵심 질문은 ‘무전공을 했느냐’가 아니라 ‘전면이냐 증분이냐’입니다."
+      },
+      {
         icon: BarChart3,
         title: "전 계열에 걸친 약세 (확정·단면)",
         body:
@@ -380,7 +395,7 @@ export const sections = {
     key: "cases" as const,
     heading: "과거사례",
     lead:
-      "자유전공학부는 2009학년도 로스쿨 도입과 학부 법대 폐지를 계기로 주요 대학에 본격 도입됐다. 이후 중앙대·연세대·한국외대 등 여러 대학은 자유전공학부를 폐지·축소했고, 당시 실패 조건은 정원 처리 성격, 인기학과 쏠림, 탐색교육·지도체계 부족으로 요약됩니다. 이런 과거가 있었음에도 일부 대학이 다시 무전공·계열제를 추진하는 것은 과거 실패를 충분히 공부하지 않은 반복일 수 있습니다. 특히 한신대가 쏠림 방지와 취약 전공 보호 장치를 먼저 세우지 못한 채 전면도입했다면, 이는 과거를 반면교사로 삼지 못한 결정이었는지 검증해야 합니다.",
+      "자유전공학부는 2009학년도 로스쿨 도입과 학부 법대 폐지를 계기로 주요 대학에 본격 도입됐다. 이후 중앙대·연세대·한국외대 등 여러 대학은 자유전공학부를 폐지·축소했고, 당시 실패 조건은 정원 처리 성격, 인기학과 쏠림, 탐색교육·지도체계 부족으로 요약됩니다. 이런 과거가 있었음에도 일부 대학이 다시 무전공·계열제를 추진하는 것은 과거 실패를 충분히 공부하지 않은 반복일 수 있습니다. 특히 한신대가 쏠림 방지와 취약 전공 보호 장치를 먼저 세우지 못한 채 전면도입했다면, 이는 과거를 반면교사로 삼지 못한 결정이었는지 검증해야 합니다. 다만 무전공은 이제 정부 정책으로 전국 표준이 되어 단순 ‘폐지’는 흐름을 거스를 수 있고, 대부분 대학은 학과를 두고 일부만 더하는 ‘증분형’입니다. 따라서 쟁점은 ‘폐지냐 유지냐’가 아니라 ‘전면이냐 증분이냐’에 가깝습니다.",
     metrics: [
       { value: "2009", label: "주요 대학 본격 도입", note: "자유전공학부 명칭" },
       { value: "2010~2015", label: "폐지·축소 사례", note: "중앙대·연세대 등" },
@@ -454,6 +469,18 @@ export const sections = {
         title: "편중 관리가 본체",
         body:
           "보완의 핵심은 자율성의 총량이 아니라 쏠림을 막는 규칙입니다. 전국 무전공 4년제의 70%+에서 상위 3개 학과가 정원의 절반을 넘게 가져갔습니다. 규칙 없는 확대는 편중을 키웁니다."
+      },
+      {
+        icon: BookOpenCheck,
+        title: "전면도입 → 증분형으로 보조 맞추기",
+        body:
+          "무전공은 전국 표준이 됐고, 대부분 대학은 학과를 두고 일부만 무전공으로 운영하는 ‘증분형’입니다. 한신만 전면입니다. 학과 골격을 일부 되살린 증분형으로 보조를 맞추는 방안을 검토할 수 있습니다. 단 이것이 경쟁률을 올린다는 보장은 없으며, 전면 전환의 충격을 줄이는 조정으로 봅니다."
+      },
+      {
+        icon: Target,
+        title: "전형을 그만 바꾸기 (전형 안정화)",
+        body:
+          "한신은 거의 매년 전형을 바꿨습니다(적성고사 대체 신설 → 계열제 → 논술 신설 → 학생부우수자·학교장추천). 수험생과 교사에게는 예측가능성이 중요합니다. 전형 틀을 여러 해 고정하는 것은 어떤 진단이 맞든 후회가 적은 선택입니다."
       },
       {
         icon: ShieldCheck,
@@ -560,8 +587,8 @@ export const sections = {
 export const evaluationPage = {
   eyebrow: "진단 · 계열제 평가",
   hero: {
-    headline: "비슷한 대학들은 회복했지만, 한신은 아직입니다.",
-    headlineSub: "그 원인과 작용 방식은 더 살핍니다.",
+    headline: "한신은 아직 미회복입니다.",
+    headlineSub: "비슷한 대학들은 회복했지만, 그 원인과 작용 방식은 더 살펴야 합니다.",
     badges: [
       { tone: "fact" as const, label: "확정", text: "비슷한 대학들은 회복했는데 한신은 그러지 못했습니다" },
       { tone: "open" as const, label: "아직 모름", text: "계열제가 ‘어떻게’ 그랬는지는 못 가렸습니다" }
@@ -707,7 +734,7 @@ export const evaluationPage = {
 export const improvementPage = {
   eyebrow: "보완 · 계열제 보완",
   hero: {
-    headline: "관건은 ‘몇 %냐’가 아니라 ‘어떤 장치를 같이 두느냐’입니다.",
+    headline: "비율보다 설계가 먼저입니다.",
     headlineSub: "쏠림을 줄일 길은 ‘상한 수치’가 아니라 동반 설계에 있습니다. 다만 그 설계 자체가 쉬운 숙제는 아닙니다.",
     badges: [
       { tone: "fact" as const, label: "확정", text: "전공 쏠림은 지금도 이미 일어나고 있습니다" },
@@ -818,7 +845,7 @@ export const improvementPage = {
 export const majorsPage = {
   eyebrow: "신설 · 전공신설",
   hero: {
-    headline: "‘무엇을 신설할까’보다 ‘지금 신설이 필요한가’를 먼저 물어야 합니다.",
+    headline: "전공신설은 필요성부터입니다.",
     headlineSub: "지금은 정원 미달이 아니며(충원율 100%), ‘곧 미달’ 공포 프레임은 신설 근거가 아니라 검증 대상입니다.",
     badges: [
       { tone: "fact" as const, label: "확정", text: "지금은 정원이 미달이 아닙니다 (신입생 충원율 100%)" },
@@ -1575,7 +1602,7 @@ export const processSteps = [
   },
   {
     title: "쟁점 숙의",
-    body: "다섯 메뉴별 반대 논거와 데이터 공백 확인",
+    body: "메뉴별 반대 논거와 데이터 공백 확인",
     icon: Compass
   },
   {

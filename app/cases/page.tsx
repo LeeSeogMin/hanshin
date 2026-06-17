@@ -1,15 +1,5 @@
-import { DiscussionSection, ProcessSection, SiteFooter } from "@/components/CommonSections";
-import { CasesDetail } from "@/components/CasesDetail";
-import { SiteHeader } from "@/components/SiteHeader";
+import { redirect } from "next/navigation";
 
 export default function CasesPage() {
-  return (
-    <main>
-      <SiteHeader activeKey="cases" />
-      <CasesDetail />
-      <ProcessSection />
-      <DiscussionSection />
-      <SiteFooter />
-    </main>
-  );
+  redirect("/evaluation/cases");
 }

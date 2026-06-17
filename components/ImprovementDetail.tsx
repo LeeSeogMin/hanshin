@@ -12,8 +12,8 @@ export function ImprovementDetail() {
         <span className="kicker">{I.eyebrow}</span>
         <h1 id="improvement-title" className="eval-hero-h1">
           {I.hero.headline}
-          <span className="eval-hero-sub">{I.hero.headlineSub}</span>
         </h1>
+        <p className="eval-hero-sub">{I.hero.headlineSub}</p>
         <div className="eval-hero-badges">
           {I.hero.badges.map((b) => (
             <span className={`eval-badge ${b.tone}`} key={b.label}>

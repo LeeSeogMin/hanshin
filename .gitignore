@@ -6,3 +6,6 @@ supabase/.temp
 .env*.local
 .env
 *.log
+.playwright-cli/
+output/
+tsconfig.tsbuildinfo

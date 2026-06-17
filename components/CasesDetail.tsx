@@ -12,8 +12,8 @@ export function CasesDetail() {
         <span className="kicker">{C.eyebrow}</span>
         <h1 id="cases-title" className="eval-hero-h1">
           {C.hero.headline}
-          <span className="eval-hero-sub">{C.hero.headlineSub}</span>
         </h1>
+        <p className="eval-hero-sub">{C.hero.headlineSub}</p>
         <div className="eval-hero-badges">
           {C.hero.badges.map((b) => (
             <span className={`eval-badge ${b.tone}`} key={b.label}>

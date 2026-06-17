@@ -1,14 +1,14 @@
+import { CasesDetail } from "@/components/CasesDetail";
 import { DiscussionSection, ProcessSection, SiteFooter } from "@/components/CommonSections";
-import { EvaluationDetail } from "@/components/EvaluationDetail";
 import { EvaluationSubnav } from "@/components/EvaluationSubnav";
 import { SiteHeader } from "@/components/SiteHeader";
 
-export default function EvaluationPage() {
+export default function EvaluationCasesPage() {
   return (
     <main>
       <SiteHeader activeKey="evaluation" />
-      <EvaluationSubnav activeKey="effect" />
-      <EvaluationDetail />
+      <EvaluationSubnav activeKey="cases" />
+      <CasesDetail />
       <ProcessSection />
       <DiscussionSection />
       <SiteFooter />

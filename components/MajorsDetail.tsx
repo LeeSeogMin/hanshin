@@ -13,8 +13,8 @@ export function MajorsDetail() {
         <span className="kicker">{M.eyebrow}</span>
         <h1 id="majors-title" className="eval-hero-h1">
           {M.hero.headline}
-          <span className="eval-hero-sub">{M.hero.headlineSub}</span>
         </h1>
+        <p className="eval-hero-sub">{M.hero.headlineSub}</p>
         <div className="eval-hero-badges">
           {M.hero.badges.map((b) => (
             <span className={`eval-badge ${b.tone}`} key={b.label}>
