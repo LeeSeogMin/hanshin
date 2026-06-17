@@ -4,12 +4,12 @@ import { DemandSubnav } from "@/components/DemandSubnav";
 import { SiteHeader } from "@/components/SiteHeader";
 import { demandPages } from "@/lib/content";
 
-export default function DemandOverviewPage() {
+export default function DemandStudentsPage() {
   return (
     <main>
       <SiteHeader activeKey="demand" />
-      <DemandSubnav activeKey="overview" />
-      <DemandDetail page={demandPages.overview} />
+      <DemandSubnav activeKey="students" />
+      <DemandDetail page={demandPages.students} />
       <ProcessSection />
       <DiscussionSection />
       <SiteFooter />

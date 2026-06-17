@@ -11,6 +11,7 @@ import {
   History,
   LineChart,
   MessageSquareText,
+  HelpCircle,
   Scale,
   ShieldCheck,
   Sparkles,
@@ -92,12 +93,19 @@ export const evaluationSubItems = [
   }
 ];
 
-export type DemandSubKey = "students" | "external" | "survey";
+export type DemandSubKey = "overview" | "students" | "external" | "survey";
 
 export const demandSubItems = [
   {
-    key: "students" as const,
+    key: "overview" as const,
     href: "/demand",
+    label: "왜 수요조사인가",
+    description: "공급자 생각을 수요자가 원하는 것으로 착각하고 있지 않은가.",
+    icon: HelpCircle
+  },
+  {
+    key: "students" as const,
+    href: "/demand/students",
     label: "재학생 의견",
     description: "2024 재학생 만족도조사에서 본 전공·융합 우선순위.",
     icon: BarChart3
@@ -348,6 +356,74 @@ export type DemandPage = {
 };
 
 export const demandPages: Record<DemandSubKey, DemandPage> = {
+  overview: {
+    eyebrow: "수요 · 왜 수요조사인가",
+    hero: {
+      headline: "우리는 정말, 수요자에게 물어본 적이 있는가?",
+      headlineSub:
+        "학생에게 맞는 전공을 주려고 복수전공·다전공·융합을 고민합니다. 그런데 이것은 정말 고3이 원하는 것일까요, 아니면 공급자(학교·교수)의 생각을 학생이 원하는 것으로 착각한 것일까요?",
+      badges: [
+        { tone: "caution", label: "핵심 의문", text: "복수전공·다전공·융합 강조는 공급자·교수 중심 발상일 수 있습니다" },
+        { tone: "open", label: "사실", text: "한신에 지원하는 고3에게 직접 물어본 적은 아직 없습니다" }
+      ],
+      big: {
+        value: "0건",
+        label: "한신 지원층(고3) 대상 직접 수요조사",
+        compare: "재학생·외부 자료는 있어도, 정작 지원자 본인에게 물은 적은 없습니다"
+      }
+    },
+    signals: [
+      { tone: "caution", label: "의문", sub: "공급자 착각?" },
+      { tone: "strong", label: "확정", sub: "직접 조사 0건" },
+      { tone: "open", label: "그래서", sub: "지금 물어야" }
+    ],
+    story: {
+      kicker: "이 메뉴가 던지는 질문",
+      title: "공급자의 생각을, 수요자가 원하는 것으로 착각하고 있지 않은가",
+      body:
+        "학생에게 맞는 전공을 주기 위해 복수전공·다전공·융합 같은 제도를 고민합니다. 방향은 좋아 보입니다. 그런데 한 걸음 물러서서 물어야 합니다 — 이것이 정말 고3이 원하는 것일까요? 특히 한신대에 지원할 만한 성적대의 학생들이 원하는 것일까요? ‘AI 시대니까 융합’이라는 말은 어쩌면 학교와 교수의 시각(공급자 마인드)일 뿐, 정작 지원하는 학생의 생각과는 다를 수 있습니다. 정말 중요한 것은 수요자의 의견인데, 우리는 그것을 들어본 적이 없습니다. 이 메뉴는 그 간극을 정직하게 들여다봅니다."
+    },
+    cards: {
+      kicker: "따져봐야 할 것",
+      title: "공급자 생각과 수요자 현실, 세 가지 점검",
+      items: [
+        {
+          title: "복수전공·다전공 — 학생이 원하나, 학교가 좋다고 보나",
+          body:
+            "더 많은 전공을 열어주는 것은 학교 입장에서 ‘좋은 기회’로 보입니다. 하지만 고3이 지원을 결정할 때 ‘여러 전공을 할 수 있어서’ 그 학교를 고르는지는 확인된 적이 없습니다. 좋아 보이는 것과 실제로 원하는 것은 다를 수 있습니다."
+        },
+        {
+          title: "‘융합’ 강조 — 미래 담론인가, 지원 이유인가",
+          body:
+            "‘AI 시대엔 융합 인재’라는 말은 교육적으로는 맞을 수 있습니다. 그러나 18세 수험생이 지원을 정하는 기준은 보통 전공의 분명함·취업·안정성입니다. 융합을 내세우는 것이 곧 지원으로 이어진다는 증거는 아직 없습니다."
+        },
+        {
+          title: "한신에 올 학생의 눈높이로 봤는가",
+          body:
+            "상위권에서 통하는 ‘무전공·자유전공’의 인기가, 한신에 지원하는 성적대의 학생에게도 똑같이 통하는지는 별개의 문제입니다. ‘남들이 한다’가 아니라 ‘우리 지원자가 원하나’를 물어야 합니다."
+        }
+      ]
+    },
+    sources: {
+      kicker: "이 메뉴에서 보는 것",
+      title: "세 갈래로 확인합니다",
+      items: [
+        { name: "재학생 의견", desc: "이미 다니는 학생은 무엇을 우선하나 (2024 만족도조사)", href: "/demand/students" },
+        { name: "외부 자료", desc: "다른 대학·해외에서 무전공·융합 수요는 어땠나", href: "/demand/external" },
+        { name: "수요조사안", desc: "그래서 한신 고3에게 직접 묻는 조사 설계", href: "/demand/survey" }
+      ]
+    },
+    questions: {
+      kicker: "공론 질문",
+      title: "수요조사 전에 먼저 인정할 것",
+      items: [
+        "우리는 ‘학생이 원한다’고 말할 때, 무엇을 근거로 그렇게 말하는가?",
+        "복수전공·다전공·융합은 학생의 요구인가, 공급자의 기대인가?",
+        "한신에 지원하는 성적대의 고3에게 직접 물어본 적이 있는가?",
+        "물어보지 않은 채 내린 결정을, 수요에 기반한 결정이라 부를 수 있는가?"
+      ]
+    }
+  },
   students: {
     eyebrow: "수요 · 재학생 의견",
     hero: {
